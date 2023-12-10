@@ -24,3 +24,6 @@ lerna-debug.log*
 
 # Environment variables
 .env
+
+# Docker Postgres Volume
+/data
