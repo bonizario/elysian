@@ -27,7 +27,6 @@ export class CreateQuestionController {
     @Body(bodyValidationPipe) body: CreateQuestionBody,
   ) {
     const { content, title } = body;
-    console.log(body);
 
     await this.prisma.question.create({
       data: {

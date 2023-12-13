@@ -35,3 +35,9 @@ Content-Type: application/json
   "title": "New question",
   "content": "New question content"
 }
+
+###
+
+# @name fetch_recent_questions
+GET {{base_url}}/questions?limit=1&page=1
+Authorization: Bearer {{access_token}}
