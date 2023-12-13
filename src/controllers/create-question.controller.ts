@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 import { CurrentUser } from '@/auth/current-user.decorator';
 import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
-import { UserPayload } from '@/auth/jwt.strategy';
+import type { UserPayload } from '@/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/pipes/zod-validation-pipe';
 import { PrismaService } from '@/prisma/prisma.service';
 
