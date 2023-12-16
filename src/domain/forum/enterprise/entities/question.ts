@@ -5,7 +5,7 @@ import type { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import type { Optional } from '@/core/types/optional';
 import { QuestionAttachmentList } from './question-attachment-list';
 import { Slug } from './value-objects/slug';
-import { QuestionBestAnswerChosenEvent } from '../events/question-best-answer-chosen';
+import { QuestionBestAnswerChosenEvent } from '../events/question-best-answer-chosen.event';
 
 export interface QuestionProps {
   authorId: UniqueEntityID;

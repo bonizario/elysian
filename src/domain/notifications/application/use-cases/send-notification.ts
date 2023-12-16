@@ -1,7 +1,7 @@
 import { right, type Either } from '@/core/either';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { Notification } from '@/domain/notifications/enterprise/entities/notification';
-import type { NotificationsRepository } from '../repositories/notifications-repository';
+import type { NotificationsRepository } from '../repositories/notifications.repository';
 
 export type SendNotificationUseCaseRequest = {
   recipientId: string;

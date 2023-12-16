@@ -8,7 +8,6 @@ import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
-    PassportModule,
     JwtModule.registerAsync({
       global: true,
       inject: [ConfigService],
@@ -30,6 +29,7 @@ import { JwtStrategy } from './jwt.strategy';
         };
       },
     }),
+    PassportModule,
   ],
   providers: [JwtStrategy],
 })
