@@ -21,6 +21,7 @@
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/no-import-type-side-effects": "error",
     "@typescript-eslint/no-unused-vars": "warn",
+    "lines-between-class-members": ["error", "always"],
     "import/newline-after-import": ["error", { "count": 1 }],
     "import/no-duplicates": ["error", { "prefer-inline": true }],
     "import/order": [
