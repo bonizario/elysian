@@ -41,7 +41,8 @@ describe('Fetch Question Answers', () => {
 
     const result = await sut.execute({
       questionId: 'question-1',
-      page: 1,
+      limit: 20,
+      page: 0,
     });
 
     expect(result.isRight()).toBe(true);
@@ -59,7 +60,8 @@ describe('Fetch Question Answers', () => {
 
     const result = await sut.execute({
       questionId: 'question-1',
-      page: 2,
+      limit: 20,
+      page: 1,
     });
 
     expect(result.isRight()).toBe(true);

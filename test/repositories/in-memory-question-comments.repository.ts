@@ -23,9 +23,12 @@ export class InMemoryQuestionCommentsRepository
     return this.items.find((item) => item.id.toValue() === id) ?? null;
   }
 
-  async findManyByQuestionId(questionId: string, { page }: PaginationParams) {
+  async findManyByQuestionId(
+    questionId: string,
+    { limit, page }: PaginationParams,
+  ) {
     return this.items
       .filter((item) => item.questionId.toValue() === questionId)
-      .slice((page - 1) * 20, page * 20);
+      .slice(page * limit, (page + 1) * limit);
   }
 }

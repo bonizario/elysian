@@ -33,7 +33,8 @@ describe('Fetch Recent Questions', () => {
     );
 
     const result = await sut.execute({
-      page: 1,
+      limit: 20,
+      page: 0,
     });
 
     expect(result.isRight()).toBe(true);
@@ -50,7 +51,8 @@ describe('Fetch Recent Questions', () => {
     }
 
     const result = await sut.execute({
-      page: 2,
+      limit: 20,
+      page: 1,
     });
 
     expect(result.isRight()).toBe(true);

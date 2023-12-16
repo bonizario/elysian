@@ -4,6 +4,7 @@ import type { AnswersRepository } from '../repositories/answers.repository';
 
 type FetchQuestionAnswersUseCaseRequest = {
   questionId: string;
+  limit: number;
   page: number;
 };
 
@@ -19,11 +20,13 @@ export class FetchQuestionAnswersUseCase {
 
   async execute({
     questionId,
+    limit,
     page,
   }: FetchQuestionAnswersUseCaseRequest): Promise<FetchQuestionAnswersUseCaseResponse> {
     const answers = await this.answersRepository.findManyByQuestionId(
       questionId,
       {
+        limit,
         page,
       },
     );

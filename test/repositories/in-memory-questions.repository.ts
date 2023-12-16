@@ -37,10 +37,10 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
     return this.items.find((item) => item.slug.value === slug) ?? null;
   }
 
-  async findManyRecent({ page }: PaginationParams) {
+  async findManyRecent({ limit, page }: PaginationParams) {
     return this.items
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
-      .slice((page - 1) * 20, page * 20);
+      .slice(page * limit, (page + 1) * limit);
   }
 
   async save(question: Question) {

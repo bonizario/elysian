@@ -1,4 +1,4 @@
-import type { Question as PrismaQuestion } from '@prisma/client';
+import type { Prisma, Question as PrismaQuestion } from '@prisma/client';
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { Question } from '@/domain/forum/enterprise/entities/question';
@@ -20,5 +20,18 @@ export class PrismaQuestionMapper {
       },
       new UniqueEntityID(raw.id),
     );
+  }
+
+  static toPrisma(raw: Question): Prisma.QuestionUncheckedCreateInput {
+    return {
+      id: raw.id.toValue(),
+      authorId: raw.authorId.toValue(),
+      bestAnswerId: raw.bestAnswerId?.toValue(),
+      content: raw.content,
+      slug: raw.slug.value,
+      title: raw.title,
+      createdAt: raw.createdAt,
+      updatedAt: raw.updatedAt,
+    };
   }
 }

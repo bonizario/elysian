@@ -30,8 +30,7 @@ export class Question extends AggregateRoot<QuestionProps> {
   set bestAnswerId(bestAnswerId: UniqueEntityID | undefined | null) {
     const isBestAnswerIdDefinedAndChanged =
       bestAnswerId &&
-      (!this.props.bestAnswerId ||
-        !this.props.bestAnswerId.equals(bestAnswerId));
+      (!this.bestAnswerId || !this.bestAnswerId.equals(bestAnswerId));
 
     if (isBestAnswerIdDefinedAndChanged) {
       this.addDomainEvent(

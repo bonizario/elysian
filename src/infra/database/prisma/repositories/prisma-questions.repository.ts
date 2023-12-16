@@ -10,15 +10,25 @@ import { PrismaService } from '../prisma.service';
 export class PrismaQuestionsRepository implements QuestionsRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  create(question: Question): Promise<void> {
-    throw new Error('Method not implemented.');
+  async create(question: Question) {
+    const data = PrismaQuestionMapper.toPrisma(question);
+
+    await this.prisma.question.create({
+      data,
+    });
   }
 
-  delete(question: Question): Promise<void> {
-    throw new Error('Method not implemented.');
+  async delete(question: Question) {
+    const data = PrismaQuestionMapper.toPrisma(question);
+
+    await this.prisma.question.delete({
+      where: {
+        id: data.id,
+      },
+    });
   }
 
-  async findById(id: string): Promise<Question | null> {
+  async findById(id: string) {
     const question = await this.prisma.question.findUnique({
       where: {
         id,
@@ -28,15 +38,36 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     return question ? PrismaQuestionMapper.toDomain(question) : null;
   }
 
-  findBySlug(slug: string): Promise<Question | null> {
-    throw new Error('Method not implemented.');
+  async findBySlug(slug: string) {
+    const question = await this.prisma.question.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+    return question ? PrismaQuestionMapper.toDomain(question) : null;
   }
 
-  findManyRecent(params: PaginationParams): Promise<Question[]> {
-    throw new Error('Method not implemented.');
+  async findManyRecent({ limit, page }: PaginationParams) {
+    const questions = await this.prisma.question.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      skip: page * limit,
+      take: limit,
+    });
+
+    return questions.map(PrismaQuestionMapper.toDomain);
   }
 
-  save(question: Question): Promise<void> {
-    throw new Error('Method not implemented.');
+  async save(question: Question) {
+    const data = PrismaQuestionMapper.toPrisma(question);
+
+    await this.prisma.question.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    });
   }
 }

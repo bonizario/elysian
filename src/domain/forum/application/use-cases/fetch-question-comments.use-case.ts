@@ -4,6 +4,7 @@ import type { QuestionCommentsRepository } from '../repositories/question-commen
 
 type FetchQuestionCommentsUseCaseRequest = {
   questionId: string;
+  limit: number;
   page: number;
 };
 
@@ -21,10 +22,12 @@ export class FetchQuestionCommentsUseCase {
 
   async execute({
     questionId,
+    limit,
     page,
   }: FetchQuestionCommentsUseCaseRequest): Promise<FetchQuestionCommentsUseCaseResponse> {
     const questionComments =
       await this.questionCommentsRepository.findManyByQuestionId(questionId, {
+        limit,
         page,
       });
 
