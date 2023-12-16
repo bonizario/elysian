@@ -11,7 +11,7 @@ export class QuestionComment extends Comment<QuestionCommentProps> {
     return this.props.questionId;
   }
 
-  public static create(
+  static create(
     props: Optional<QuestionCommentProps, 'createdAt'>,
     id?: UniqueEntityID,
   ) {

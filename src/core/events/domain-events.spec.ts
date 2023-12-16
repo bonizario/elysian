@@ -10,7 +10,7 @@ class CustomAggregateCreated implements DomainEvent {
 
   public occurredAt: Date;
 
-  public constructor(aggregate: CustomAggregate) {
+  constructor(aggregate: CustomAggregate) {
     this.aggregate = aggregate;
     this.occurredAt = new Date();
   }
@@ -21,7 +21,7 @@ class CustomAggregateCreated implements DomainEvent {
 }
 
 class CustomAggregate extends AggregateRoot<null> {
-  public static create() {
+  static create() {
     const aggregate = new CustomAggregate(null);
 
     aggregate.addDomainEvent(new CustomAggregateCreated(aggregate));

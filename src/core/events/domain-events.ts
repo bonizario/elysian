@@ -10,7 +10,7 @@ export class DomainEvents {
 
   private static markedAggregates: AggregateRoot<unknown>[] = [];
 
-  public static markAggregateForDispatch(aggregate: AggregateRoot<unknown>) {
+  static markAggregateForDispatch(aggregate: AggregateRoot<unknown>) {
     const aggregateFound = !!this.findMarkedAggregateByID(aggregate.id);
 
     if (!aggregateFound) {
@@ -38,7 +38,7 @@ export class DomainEvents {
     return this.markedAggregates.find((aggregate) => aggregate.id.equals(id));
   }
 
-  public static dispatchEventsForAggregate(id: UniqueEntityID) {
+  static dispatchEventsForAggregate(id: UniqueEntityID) {
     const aggregate = this.findMarkedAggregateByID(id);
 
     if (aggregate) {
@@ -48,7 +48,7 @@ export class DomainEvents {
     }
   }
 
-  public static register<T extends DomainEvent>(
+  static register<T extends DomainEvent>(
     callback: DomainEventCallback<T>,
     eventClassName: string,
   ) {
@@ -61,11 +61,11 @@ export class DomainEvents {
     this.handlersMap[eventClassName].push(callback);
   }
 
-  public static clearHandlers() {
+  static clearHandlers() {
     this.handlersMap = {};
   }
 
-  public static clearMarkedAggregates() {
+  static clearMarkedAggregates() {
     this.markedAggregates = [];
   }
 

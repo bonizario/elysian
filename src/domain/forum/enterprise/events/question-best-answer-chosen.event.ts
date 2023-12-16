@@ -3,13 +3,13 @@ import type { DomainEvent } from '@/core/events/domain-event';
 import type { Question } from '../entities/question';
 
 export class QuestionBestAnswerChosenEvent implements DomainEvent {
-  public readonly bestAnswerId: UniqueEntityID;
+  readonly bestAnswerId: UniqueEntityID;
 
-  public readonly question: Question;
+  readonly question: Question;
 
-  public readonly occurredAt: Date;
+  readonly occurredAt: Date;
 
-  public constructor(question: Question, bestAnswerId: UniqueEntityID) {
+  constructor(question: Question, bestAnswerId: UniqueEntityID) {
     this.bestAnswerId = bestAnswerId;
     this.question = question;
     this.occurredAt = new Date();

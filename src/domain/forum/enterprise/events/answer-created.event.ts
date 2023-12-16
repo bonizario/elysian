@@ -3,11 +3,11 @@ import type { DomainEvent } from '@/core/events/domain-event';
 import type { Answer } from '../entities/answer';
 
 export class AnswerCreatedEvent implements DomainEvent {
-  public readonly answer: Answer;
+  readonly answer: Answer;
 
-  public readonly occurredAt: Date;
+  readonly occurredAt: Date;
 
-  public constructor(answer: Answer) {
+  constructor(answer: Answer) {
     this.answer = answer;
     this.occurredAt = new Date();
   }

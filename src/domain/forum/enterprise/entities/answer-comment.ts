@@ -11,7 +11,7 @@ export class AnswerComment extends Comment<AnswerCommentProps> {
     return this.props.answerId;
   }
 
-  public static create(
+  static create(
     props: Optional<AnswerCommentProps, 'createdAt'>,
     id?: UniqueEntityID,
   ) {

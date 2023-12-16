@@ -3,7 +3,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { Answer } from '@/domain/forum/enterprise/entities/answer';
 import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-attachment';
 import { AnswerAttachmentList } from '@/domain/forum/enterprise/entities/answer-attachment-list';
-import type { AnswersRepository } from '../repositories/answers.repository';
+import { AnswersRepository } from '../repositories/answers.repository';
 
 type AnswerQuestionUseCaseRequest = {
   attachmentsIds: string[];

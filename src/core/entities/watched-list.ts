@@ -7,14 +7,14 @@ export abstract class WatchedList<T> {
 
   private removed: T[];
 
-  public constructor(initialItems?: T[]) {
+  constructor(initialItems?: T[]) {
     this.currentItems = initialItems ?? [];
     this.initial = initialItems ?? [];
     this.new = [];
     this.removed = [];
   }
 
-  public abstract isEqual(a: T, b: T): boolean;
+  abstract isEqual(a: T, b: T): boolean;
 
   public getItems(): T[] {
     return this.currentItems;

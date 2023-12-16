@@ -40,7 +40,7 @@ export class Notification extends Entity<NotificationProps> {
     this.props.createdAt = new Date();
   }
 
-  public static create(
+  static create(
     props: Optional<NotificationProps, 'createdAt'>,
     id?: UniqueEntityID,
   ) {

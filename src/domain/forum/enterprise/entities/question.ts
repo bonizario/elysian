@@ -94,7 +94,7 @@ export class Question extends AggregateRoot<QuestionProps> {
     this.props.updatedAt = new Date();
   }
 
-  public static create(
+  static create(
     props: Optional<QuestionProps, 'attachments' | 'slug' | 'createdAt'>,
     id?: UniqueEntityID,
   ) {

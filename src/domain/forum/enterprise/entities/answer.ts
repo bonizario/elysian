@@ -56,7 +56,7 @@ export class Answer extends AggregateRoot<AnswerProps> {
     this.props.updatedAt = new Date();
   }
 
-  public static create(
+  static create(
     props: Optional<AnswerProps, 'attachments' | 'createdAt'>,
     id?: UniqueEntityID,
   ) {

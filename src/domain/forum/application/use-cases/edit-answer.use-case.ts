@@ -5,8 +5,8 @@ import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error';
 import type { Answer } from '@/domain/forum/enterprise/entities/answer';
 import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-attachment';
 import { AnswerAttachmentList } from '@/domain/forum/enterprise/entities/answer-attachment-list';
-import type { AnswerAttachmentsRepository } from '../repositories/answer-attachments.repository';
-import type { AnswersRepository } from '../repositories/answers.repository';
+import { AnswerAttachmentsRepository } from '../repositories/answer-attachments.repository';
+import { AnswersRepository } from '../repositories/answers.repository';
 
 type EditAnswerUseCaseRequest = {
   attachmentsIds: string[];

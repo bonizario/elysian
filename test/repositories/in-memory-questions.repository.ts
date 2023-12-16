@@ -7,7 +7,7 @@ import type { InMemoryQuestionAttachmentsRepository } from './in-memory-question
 export class InMemoryQuestionsRepository implements QuestionsRepository {
   public items: Question[] = [];
 
-  public constructor(
+  constructor(
     private readonly inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository,
   ) {}
 

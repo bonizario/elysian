@@ -29,9 +29,9 @@ export const right = <R>(value: R): Right<R> => new Right(value);
  * The value of a Left instance is of type L, which represents the error.
  */
 class Left<L> {
-  public readonly value: L;
+  readonly value: L;
 
-  public constructor(value: L) {
+  constructor(value: L) {
     this.value = value;
   }
 
@@ -56,9 +56,9 @@ class Left<L> {
  * The value of a Right instance is of type R, which represents the success value.
  */
 class Right<R> {
-  public readonly value: R;
+  readonly value: R;
 
-  public constructor(value: R) {
+  constructor(value: R) {
     this.value = value;
   }
 

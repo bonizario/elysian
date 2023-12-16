@@ -5,7 +5,7 @@ export class Slug {
     this.value = value;
   }
 
-  public static create(slug: string) {
+  static create(slug: string) {
     return new Slug(slug);
   }
 
@@ -19,7 +19,7 @@ export class Slug {
    * Slug.createFromText('An example text'); // returns 'an-example-text'
    * ```
    **/
-  public static createFromText(text: string) {
+  static createFromText(text: string) {
     const slugText = text
       .normalize('NFKD')
       .toLowerCase()
