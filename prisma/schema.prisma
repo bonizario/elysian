@@ -7,29 +7,56 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  STUDENT
+  INSTRUCTOR
+
+  @@map("user_role")
+}
+
 model User {
   id        String    @id @default(uuid()) @db.Uuid
   email     String    @unique
   name      String
   password  String
+  role      UserRole  @default(STUDENT)
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
+  answers   Answer[]
   questions Question[]
 
   @@map("users")
 }
 
 model Question {
-  id        String    @id @default(uuid()) @db.Uuid
-  authorId  String    @map("author_id") @db.Uuid
-  content   String
-  slug      String    @unique
-  title     String
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime? @updatedAt @map("updated_at")
+  id           String    @id @default(uuid()) @db.Uuid
+  authorId     String    @map("author_id") @db.Uuid
+  bestAnswerId String?   @unique @map("best_answer_id") @db.Uuid
+  content      String
+  slug         String    @unique
+  title        String
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime? @updatedAt @map("updated_at")
 
-  author User @relation(fields: [authorId], references: [id])
+  author     User     @relation(fields: [authorId], references: [id])
+  bestAnswer Answer?  @relation("bestAnswer", fields: [bestAnswerId], references: [id])
+  answers    Answer[]
 
   @@map("questions")
+}
+
+model Answer {
+  id         String    @id @default(uuid()) @db.Uuid
+  authorId   String    @map("author_id") @db.Uuid
+  questionId String    @map("question_id") @db.Uuid
+  content    String
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime? @updatedAt @map("updated_at")
+
+  author       User      @relation(fields: [authorId], references: [id])
+  bestAnswerOn Question? @relation("bestAnswer")
+  question     Question  @relation(fields: [questionId], references: [id])
+
+  @@map("answers")
 }

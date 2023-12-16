@@ -9,7 +9,7 @@ import { QuestionBestAnswerChosenEvent } from '../events/question-best-answer-ch
 
 export interface QuestionProps {
   authorId: UniqueEntityID;
-  bestAnswerId?: UniqueEntityID;
+  bestAnswerId?: UniqueEntityID | null;
   attachments: QuestionAttachmentList;
   content: string;
   slug: Slug;
@@ -27,10 +27,10 @@ export class Question extends AggregateRoot<QuestionProps> {
     return this.props.bestAnswerId;
   }
 
-  set bestAnswerId(bestAnswerId: UniqueEntityID | undefined) {
+  set bestAnswerId(bestAnswerId: UniqueEntityID | undefined | null) {
     const isBestAnswerIdDefinedAndChanged =
-      bestAnswerId !== undefined &&
-      (this.props.bestAnswerId === undefined ||
+      bestAnswerId &&
+      (!this.props.bestAnswerId ||
         !this.props.bestAnswerId.equals(bestAnswerId));
 
     if (isBestAnswerIdDefinedAndChanged) {
