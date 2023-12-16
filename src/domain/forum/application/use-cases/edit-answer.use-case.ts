@@ -27,6 +27,7 @@ export class EditAnswerUseCase {
     private readonly answerAttachmentsRepository: AnswerAttachmentsRepository,
     private readonly answersRepository: AnswersRepository,
   ) {}
+
   async execute({
     attachmentsIds,
     authorId,
