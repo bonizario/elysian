@@ -1,0 +1,46 @@
+import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question';
+import { makeQuestion } from '@/test/factories/make-question';
+import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory-question-attachments-repository';
+import { InMemoryQuestionCommentsRepository } from '@/test/repositories/in-memory-question-comments-repository';
+import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory-questions-repository';
+
+let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
+let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository;
+let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
+let sut: CommentOnQuestionUseCase;
+
+describe('Comment on Question', () => {
+  beforeEach(() => {
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository();
+
+    inMemoryQuestionCommentsRepository =
+      new InMemoryQuestionCommentsRepository();
+
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryQuestionAttachmentsRepository,
+    );
+
+    sut = new CommentOnQuestionUseCase(
+      inMemoryQuestionCommentsRepository,
+      inMemoryQuestionsRepository,
+    );
+  });
+
+  it('should be able to comment on question', async () => {
+    const question = makeQuestion();
+
+    await inMemoryQuestionsRepository.create(question);
+
+    const result = await sut.execute({
+      authorId: question.authorId.toValue(),
+      questionId: question.id.toValue(),
+      content: 'Example comment',
+    });
+
+    expect(result.isRight()).toBe(true);
+    expect(inMemoryQuestionCommentsRepository.items[0]?.content).toBe(
+      'Example comment',
+    );
+  });
+});
