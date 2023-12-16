@@ -21,8 +21,8 @@ export class Student extends Entity<StudentProps> {
   }
 
   static create(props: StudentProps, id?: UniqueEntityID) {
-    const answer = new Student(props, id);
+    const student = new Student(props, id);
 
-    return answer;
+    return student;
   }
 }
