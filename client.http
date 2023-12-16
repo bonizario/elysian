@@ -39,5 +39,5 @@ Content-Type: application/json
 ###
 
 # @name fetch_recent_questions
-GET {{base_url}}/questions?limit=1&page=1
+GET {{base_url}}/questions?limit=20&page=0
 Authorization: Bearer {{access_token}}

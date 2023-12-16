@@ -1,13 +1,14 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { z } from 'zod';
 
+import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions.use-case';
 import { JwtAuthGuard } from '@/infra/auth/jwt-auth.guard';
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
+import { QuestionPresenter } from '../presenters/question.presenter';
 
 const queryParamSchema = z.object({
-  page: z.coerce.number().int().min(0).optional().default(0),
   limit: z.coerce.number().int().min(1).max(100).optional().default(20),
+  page: z.coerce.number().int().min(0).optional().default(0),
 });
 
 const queryValidationPipe = new ZodValidationPipe(queryParamSchema);
@@ -17,19 +18,19 @@ type QueryParam = z.infer<typeof queryParamSchema>;
 @Controller('/questions')
 @UseGuards(JwtAuthGuard)
 export class FetchRecentQuestionsController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly fetchRecentQuestions: FetchRecentQuestionsUseCase,
+  ) {}
 
   @Get()
-  async handle(@Query(queryValidationPipe) params: QueryParam) {
-    const { page, limit } = params;
+  async handle(@Query(queryValidationPipe) { limit, page }: QueryParam) {
+    const result = await this.fetchRecentQuestions.execute({ limit, page });
 
-    const questions = await this.prisma.question.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-      skip: page * limit,
-      take: limit,
-    });
+    if (result.isLeft()) {
+      throw new Error(); // TODO: handle error
+    }
+
+    const questions = result.value.questions.map(QuestionPresenter.toHTTP);
 
     return {
       questions,
