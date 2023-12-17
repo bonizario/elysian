@@ -9,13 +9,13 @@ export class PrismaQuestionMapper {
   static toDomain(raw: PrismaQuestion): Question {
     return Question.create(
       {
-        title: raw.title,
-        content: raw.content,
         authorId: new UniqueEntityID(raw.authorId),
         bestAnswerId: raw.bestAnswerId
           ? new UniqueEntityID(raw.bestAnswerId)
           : null,
+        content: raw.content,
         slug: Slug.create(raw.slug),
+        title: raw.title,
         createdAt: raw.createdAt,
         updatedAt: raw.updatedAt,
       },
