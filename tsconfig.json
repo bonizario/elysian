@@ -20,7 +20,6 @@
     "resolveJsonModule": true,                        /* Enable importing .json files. */
 
     /* Emit */
-    "declaration": true,                              /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
     "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
     "outDir": "./dist",                               /* Specify an output folder for all emitted files. */
     "removeComments": true,                           /* Disable emitting comments. */
