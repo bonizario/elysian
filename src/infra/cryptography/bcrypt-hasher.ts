@@ -1,12 +1,16 @@
+import { compare, hash } from 'bcryptjs';
+
 import { HashComparator } from '@/domain/forum/application/cryptography/hash-comparator';
 import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator';
 
-export class FakeHasher implements HashComparator, HashGenerator {
+export class BcryptHasher implements HashComparator, HashGenerator {
+  private readonly HASH_SALT_LENGTH = 8;
+
   async compare(plain: string, hash: string) {
-    return plain.concat('-hashed') === hash;
+    return compare(plain, hash);
   }
 
   async hash(plain: string) {
-    return plain.concat('-hashed');
+    return hash(plain, this.HASH_SALT_LENGTH);
   }
 }
