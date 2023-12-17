@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { Encrypter } from '@/domain/forum/application/cryptography/encrypter';
 import { HashComparator } from '@/domain/forum/application/cryptography/hash-comparator';
 import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator';
+
 import { BcryptHasher } from './bcrypt-hasher';
 import { JwtEncrypter } from './jwt-encrypter';
 

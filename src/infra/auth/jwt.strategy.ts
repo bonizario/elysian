@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { z } from 'zod';
 
-import { EnvService } from '../env/env.service';
+import { EnvService } from '@/infra/env/env.service';
 
 const userPayloadSchema = z.object({
   sub: z.string().uuid(),

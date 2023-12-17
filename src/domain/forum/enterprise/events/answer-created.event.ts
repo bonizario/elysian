@@ -1,6 +1,7 @@
 import type { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import type { DomainEvent } from '@/core/events/domain-event';
-import type { Answer } from '../entities/answer';
+
+import type { Answer } from '@/domain/forum/enterprise/entities/answer';
 
 export class AnswerCreatedEvent implements DomainEvent {
   readonly answer: Answer;

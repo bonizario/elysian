@@ -1,9 +1,10 @@
 import { left, right, type Either } from '@/core/either';
 import { NotAllowedError } from '@/core/errors/not-allowed-error';
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error';
+
+import { AnswersRepository } from '@/domain/forum/application/repositories/answers.repository';
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository';
 import type { Question } from '@/domain/forum/enterprise/entities/question';
-import { AnswersRepository } from '../repositories/answers.repository';
-import { QuestionsRepository } from '../repositories/questions.repository';
 
 type ChooseQuestionBestAnswerUseCaseRequest = {
   answerId: string;

@@ -1,6 +1,7 @@
 import { FakeHasher } from '@/test/cryptography/fake-hasher';
 import { makeStudent } from '@/test/factories/make-student';
 import { InMemoryStudentsRepository } from '@/test/repositories/in-memory-students.repository';
+
 import { StudentAlreadyExistsError } from './errors/student-already-exists-error';
 import { RegisterStudentUseCase } from './register-student.use-case';
 

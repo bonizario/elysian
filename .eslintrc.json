@@ -39,12 +39,27 @@
         "newlines-between": "always",
         "pathGroups": [
           {
-            "pattern": "@/**",
+            "pattern": "@/core/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/domain/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/infra/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/test/**",
             "group": "internal",
             "position": "before"
           }
         ],
-        "distinctGroup": false,
+        "distinctGroup": true,
         "pathGroupsExcludedImportTypes": ["object", "type"]
       }
     ],

@@ -5,6 +5,7 @@ import {
   type SendNotificationUseCaseRequest,
   type SendNotificationUseCaseResponse,
 } from '@/domain/notifications/application/use-cases/send-notification';
+
 import { makeAnswer } from '@/test/factories/make-answer';
 import { makeQuestion } from '@/test/factories/make-question';
 import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/in-memory-answer-attachments.repository';
@@ -13,6 +14,7 @@ import { InMemoryNotificationsRepository } from '@/test/repositories/in-memory-n
 import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory-question-attachments.repository';
 import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory-questions.repository';
 import { waitFor } from '@/test/utils/wait-for';
+
 import { OnAnswerCreated } from './on-answer-created';
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;

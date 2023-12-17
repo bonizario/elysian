@@ -2,6 +2,7 @@ import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 import { z } from 'zod';
 
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question.use-case';
+
 import { CurrentUser } from '@/infra/auth/current-user.decorator';
 import type { UserPayload } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';

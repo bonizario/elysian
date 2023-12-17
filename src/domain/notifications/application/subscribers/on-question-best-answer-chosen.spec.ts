@@ -1,11 +1,13 @@
 import type { MockInstance } from 'vitest';
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+
 import {
   SendNotificationUseCase,
   type SendNotificationUseCaseRequest,
   type SendNotificationUseCaseResponse,
 } from '@/domain/notifications/application/use-cases/send-notification';
+
 import { makeAnswer } from '@/test/factories/make-answer';
 import { makeQuestion } from '@/test/factories/make-question';
 import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/in-memory-answer-attachments.repository';
@@ -14,6 +16,7 @@ import { InMemoryNotificationsRepository } from '@/test/repositories/in-memory-n
 import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory-question-attachments.repository';
 import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory-questions.repository';
 import { waitFor } from '@/test/utils/wait-for';
+
 import { OnQuestionBestAnswerChosen } from './on-question-best-answer-chosen';
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;

@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 
 import { left, right, type Either } from '@/core/either';
+
+import { Encrypter } from '@/domain/forum/application/cryptography/encrypter';
+import { HashComparator } from '@/domain/forum/application/cryptography/hash-comparator';
+import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator';
+import { StudentsRepository } from '@/domain/forum/application/repositories/students.repository';
+
 import { InvalidCredentialsError } from './errors/invalid-credentials-error';
-import { Encrypter } from '../cryptography/encrypter';
-import { HashComparator } from '../cryptography/hash-comparator';
-import { HashGenerator } from '../cryptography/hash-generator';
-import { StudentsRepository } from '../repositories/students.repository';
 
 type AuthenticateStudentUseCaseRequest = {
   email: string;

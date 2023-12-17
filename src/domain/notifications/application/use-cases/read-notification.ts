@@ -1,8 +1,9 @@
 import { left, right, type Either } from '@/core/either';
 import { NotAllowedError } from '@/core/errors/not-allowed-error';
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error';
+
+import type { NotificationsRepository } from '@/domain/notifications/application/repositories/notifications.repository';
 import type { Notification } from '@/domain/notifications/enterprise/entities/notification';
-import type { NotificationsRepository } from '../repositories/notifications.repository';
 
 type ReadNotificationUseCaseRequest = {
   notificationId: string;

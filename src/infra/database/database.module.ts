@@ -7,6 +7,7 @@ import { QuestionAttachmentsRepository } from '@/domain/forum/application/reposi
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments.repository';
 import { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository';
 import { StudentsRepository } from '@/domain/forum/application/repositories/students.repository';
+
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaAnswerAttachmentsRepository } from './prisma/repositories/prisma-answer-attachments.repository';
 import { PrismaAnswerCommentsRepository } from './prisma/repositories/prisma-answer-comments.repository';

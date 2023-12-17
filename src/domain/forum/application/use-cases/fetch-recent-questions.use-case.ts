@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 
 import { right, type Either } from '@/core/either';
+
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository';
 import type { Question } from '@/domain/forum/enterprise/entities/question';
-import { QuestionsRepository } from '../repositories/questions.repository';
 
 type FetchRecentQuestionsUseCaseRequest = {
   limit: number;

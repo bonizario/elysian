@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 
 import { left, right, type Either } from '@/core/either';
+
+import { HashGenerator } from '@/domain/forum/application/cryptography/hash-generator';
+import { StudentsRepository } from '@/domain/forum/application/repositories/students.repository';
 import { Student } from '@/domain/forum/enterprise/entities/student';
+
 import { StudentAlreadyExistsError } from './errors/student-already-exists-error';
-import { HashGenerator } from '../cryptography/hash-generator';
-import { StudentsRepository } from '../repositories/students.repository';
 
 type RegisterStudentUseCaseRequest = {
   email: string;

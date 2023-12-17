@@ -1,6 +1,7 @@
+import { AggregateRoot } from '@/core/entities/aggregate-root';
+import { UniqueEntityID } from '@/core/entities/unique-entity-id';
+
 import type { DomainEvent } from './domain-event';
-import { AggregateRoot } from '../entities/aggregate-root';
-import { UniqueEntityID } from '../entities/unique-entity-id';
 
 type DomainEventCallback<T extends DomainEvent> = (event: T) => void;
 

@@ -1,14 +1,15 @@
 import { DomainEvents } from '@/core/events/domain-events';
 import type { PaginationParams } from '@/core/repositories/pagination-params';
+
+import type { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments.repository';
 import type { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository';
 import type { Question } from '@/domain/forum/enterprise/entities/question';
-import type { InMemoryQuestionAttachmentsRepository } from './in-memory-question-attachments.repository';
 
 export class InMemoryQuestionsRepository implements QuestionsRepository {
   public items: Question[] = [];
 
   constructor(
-    private readonly inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository,
+    private readonly inMemoryQuestionAttachmentsRepository: QuestionAttachmentsRepository,
   ) {}
 
   async create(question: Question) {

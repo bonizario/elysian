@@ -2,11 +2,12 @@ import { left, right, type Either } from '@/core/either';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { NotAllowedError } from '@/core/errors/not-allowed-error';
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error';
+
+import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments.repository';
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository';
 import type { Question } from '@/domain/forum/enterprise/entities/question';
 import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-attachment';
 import { QuestionAttachmentList } from '@/domain/forum/enterprise/entities/question-attachment-list';
-import { QuestionAttachmentsRepository } from '../repositories/question-attachments.repository';
-import { QuestionsRepository } from '../repositories/questions.repository';
 
 type EditQuestionUseCaseRequest = {
   attachmentsIds: string[];

@@ -1,9 +1,10 @@
 import { left, right, type Either } from '@/core/either';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error';
+
+import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments.repository';
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository';
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment';
-import { QuestionCommentsRepository } from '../repositories/question-comments.repository';
-import { QuestionsRepository } from '../repositories/questions.repository';
 
 type CommentOnQuestionUseCaseRequest = {
   authorId: string;

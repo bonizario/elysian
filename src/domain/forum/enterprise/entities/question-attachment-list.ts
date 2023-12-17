@@ -1,4 +1,5 @@
 import { WatchedList } from '@/core/entities/watched-list';
+
 import type { QuestionAttachment } from './question-attachment';
 
 export class QuestionAttachmentList extends WatchedList<QuestionAttachment> {
