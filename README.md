@@ -1,18 +1,14 @@
-## JWT (JSON Web Token)
+## JSON Web Token (JWT)
 
-HS256 (HMAC-SHA256) and RS256 (RSA-SHA256) are both algorithms used for signing JWTs, but they work in different ways:
+JSON Web Token (JWT) is a compact and self-contained method for securely transmitting information between parties as a JSON object.
 
-- HS256 uses a symmetric key algorithm. This means it uses the same secret key to **both sign and verify tokens**. This approach is simple and fast, but it requires you to securely share the secret key with any party that needs to verify your tokens.
+This information can be verified and trusted because it is digitally signed (via one of the many cryptography algorithms available). The main difference between these algorithms is the type of key they use:
 
-- RS256 uses an asymmetric key algorithm. This means it uses a **private key to sign tokens** and a corresponding **public key to verify them**. This approach is more secure because you can distribute the public key widely without compromising the security of your tokens. However, it's also more computationally intensive.
+- Symmetric algorithms (HMAC) use a **secret key** for signing and verifying tokens. The key must be kept secure and shared between parties that need to verify the token.
 
-RS256 can be particularly useful in a microservices architecture, where you might have many services that need to verify tokens but should not be able to generate them.
+- Asymmetric algorithms (RSA, ECDSA, EdDSA) use a **private key** for signing tokens and a corresponding **public key** for verifying them. The private key must be kept secure within the main service, while the public key can be freely distributed to any other party that needs to verify tokens but should not be able to generate them.
 
 ### Setup environment variables
-
-```shell
-cp .env.example .env
-```
 
 You can generate a private and public key pair using the `openssl` command in Linux/macOS:
 
@@ -42,9 +38,64 @@ base64 -w 0 private_key.pem > private_key_base64.pem
 base64 public_key.pem > public_key_base64.pem
 ```
 
-5. Paste both base64 encoded keys into the `.env` file:
+5. Copy the `.env.example` content into a new `.env` file:
+
+```shell
+cp .env.example .env
+```
+
+6. Paste both base64 encoded keys into the `.env` file and delete the generated files afterward:
 
 ```properties
 JWT_PRIVATE_KEY=
 JWT_PUBLIC_KEY=
+```
+
+## Clean Architecture and Domain-Driven Design
+
+### Folder structure
+
+```
+.
+├── prisma
+│   └── migrations
+├── src
+│   ├── core
+│   │   ├── entities
+│   │   ├── errors
+│   │   ├── events
+│   │   ├── repositories
+│   │   └── types
+│   ├── domain
+│   │   ├── forum
+│   │   │   ├── application
+│   │   │   │   ├── cryptography
+│   │   │   │   ├── repositories
+│   │   │   │   └── use-cases
+│   │   │   │       └── errors
+│   │   │   └── enterprise
+│   │   │       ├── entities
+│   │   │       │   └── value-objects
+│   │   │       └── events
+│   │   └── notifications
+│   │       ├── application
+│   │       │   ├── repositories
+│   │       │   ├── subscribers
+│   │       │   └── use-cases
+│   │       └── enterprise
+│   │           └── entities
+│   └── infra
+│       ├── auth
+│       ├── database
+│       │   └── prisma
+│       │       ├── mappers
+│       │       └── repositories
+│       └── http
+│           ├── controllers
+│           ├── pipes
+│           └── presenters
+└── test
+    ├── factories
+    ├── repositories
+    └── utils
 ```
