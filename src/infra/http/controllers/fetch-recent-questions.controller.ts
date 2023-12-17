@@ -1,4 +1,10 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { z } from 'zod';
 
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions.use-case';
@@ -27,7 +33,7 @@ export class FetchRecentQuestionsController {
     const result = await this.fetchRecentQuestions.execute({ limit, page });
 
     if (result.isLeft()) {
-      throw new Error(); // TODO: handle error
+      throw new BadRequestException();
     }
 
     const questions = result.value.questions.map(QuestionPresenter.toHTTP);

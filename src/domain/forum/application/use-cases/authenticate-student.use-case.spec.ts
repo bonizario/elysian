@@ -22,6 +22,7 @@ describe('Authenticate Student', () => {
       inMemoryStudentsRepository,
       fakeEncrypter,
       fakeHasher,
+      fakeHasher,
     );
   });
 

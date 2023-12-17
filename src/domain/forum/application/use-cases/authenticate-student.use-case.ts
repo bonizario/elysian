@@ -4,6 +4,7 @@ import { left, right, type Either } from '@/core/either';
 import { InvalidCredentialsError } from './errors/invalid-credentials-error';
 import { Encrypter } from '../cryptography/encrypter';
 import { HashComparator } from '../cryptography/hash-comparator';
+import { HashGenerator } from '../cryptography/hash-generator';
 import { StudentsRepository } from '../repositories/students.repository';
 
 type AuthenticateStudentUseCaseRequest = {
@@ -24,6 +25,7 @@ export class AuthenticateStudentUseCase {
     private readonly studentsRepository: StudentsRepository,
     private readonly encrypter: Encrypter,
     private readonly hashComparator: HashComparator,
+    private readonly hashGenerator: HashGenerator,
   ) {}
 
   async execute({
@@ -33,6 +35,7 @@ export class AuthenticateStudentUseCase {
     const student = await this.studentsRepository.findByEmail(email);
 
     if (!student) {
+      await this.hashGenerator.hash(password); //avoidance of timing attacks
       return left(new InvalidCredentialsError());
     }
 
