@@ -6,15 +6,15 @@ import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-case
 import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student.use-case';
 import { DatabaseModule } from '@/infra/database/database.module';
 import { AuthenticateController } from './controllers/authenticate.controller';
-import { CreateAccountController } from './controllers/create-account.controller';
 import { CreateQuestionController } from './controllers/create-question.controller';
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller';
+import { RegisterStudentController } from './controllers/register-student.controller';
 import { CryptographyModule } from '../cryptography/cryptography.module';
 
 @Module({
   controllers: [
     AuthenticateController,
-    CreateAccountController,
+    RegisterStudentController,
     CreateQuestionController,
     FetchRecentQuestionsController,
   ],
