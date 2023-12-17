@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
-import { Env } from '@/infra/env';
+import { EnvModule } from '../env/env.module';
+import { EnvService } from '../env/env.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { JwtStrategy } from './jwt.strategy';
 
@@ -12,15 +12,12 @@ import { JwtStrategy } from './jwt.strategy';
   imports: [
     JwtModule.registerAsync({
       global: true,
-      inject: [ConfigService],
-      useFactory(configService: ConfigService<Env, true>) {
-        const privateKey = configService.get('JWT_PRIVATE_KEY', {
-          infer: true,
-        });
+      imports: [EnvModule],
+      inject: [EnvService],
+      useFactory(env: EnvService) {
+        const privateKey = env.get('JWT_PRIVATE_KEY');
 
-        const publicKey = configService.get('JWT_PUBLIC_KEY', {
-          infer: true,
-        });
+        const publicKey = env.get('JWT_PUBLIC_KEY');
 
         return {
           privateKey: Buffer.from(privateKey, 'base64'),
@@ -38,6 +35,7 @@ import { JwtStrategy } from './jwt.strategy';
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
+    EnvService,
     JwtStrategy,
   ],
 })
