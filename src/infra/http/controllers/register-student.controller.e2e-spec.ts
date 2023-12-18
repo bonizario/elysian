@@ -5,7 +5,7 @@ import request from 'supertest';
 import { AppModule } from '@/infra/app.module';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
-describe('Create Account (E2E)', () => {
+describe('Register student (E2E)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
 
@@ -15,7 +15,6 @@ describe('Create Account (E2E)', () => {
     }).compile();
 
     app = moduleRef.createNestApplication();
-
     prisma = moduleRef.get(PrismaService);
 
     await app.init();
@@ -27,8 +26,8 @@ describe('Create Account (E2E)', () => {
 
   test('[POST] /accounts', async () => {
     const response = await request(app.getHttpServer()).post('/accounts').send({
-      name: 'John Doe',
       email: 'johndoe@example.com',
+      name: 'John Doe',
       password: '123456',
     });
 

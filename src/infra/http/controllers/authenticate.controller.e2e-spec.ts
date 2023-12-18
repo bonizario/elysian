@@ -4,20 +4,20 @@ import { hash } from 'bcryptjs';
 import request from 'supertest';
 
 import { AppModule } from '@/infra/app.module';
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
+
+import { StudentFactory } from '@/test/factories/make-student';
 
 describe('Authenticate (E2E)', () => {
   let app: INestApplication;
-  let prisma: PrismaService;
+  let studentFactory: StudentFactory;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
+      providers: [StudentFactory],
     }).compile();
 
     app = moduleRef.createNestApplication();
-
-    prisma = moduleRef.get(PrismaService);
 
     await app.init();
   });
@@ -27,12 +27,9 @@ describe('Authenticate (E2E)', () => {
   });
 
   test('[POST] /sessions', async () => {
-    await prisma.user.create({
-      data: {
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        password: await hash('123456', 8),
-      },
+    await studentFactory.makePrismaStudent({
+      email: 'johndoe@example.com',
+      password: await hash('123456', 8),
     });
 
     const response = await request(app.getHttpServer()).post('/sessions').send({
