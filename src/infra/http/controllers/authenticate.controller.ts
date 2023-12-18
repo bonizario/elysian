@@ -11,7 +11,7 @@ import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases
 import { InvalidCredentialsError } from '@/domain/forum/application/use-cases/errors/invalid-credentials-error';
 
 import { Public } from '@/infra/auth/public';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 
 const authenticateBodySchema = z.object({
   email: z.string().email(),

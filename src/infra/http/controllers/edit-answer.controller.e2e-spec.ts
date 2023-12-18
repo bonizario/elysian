@@ -11,7 +11,7 @@ import { AnswerFactory } from '@/test/factories/make-answer';
 import { QuestionFactory } from '@/test/factories/make-question';
 import { StudentFactory } from '@/test/factories/make-student';
 
-describe('Edit answer (E2E)', () => {
+describe('Edit Answer (E2E)', () => {
   let app: INestApplication;
   let jwt: JwtService;
   let prisma: PrismaService;

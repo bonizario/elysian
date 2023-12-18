@@ -5,7 +5,7 @@ import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/crea
 
 import { CurrentUser } from '@/infra/auth/current-user.decorator';
 import type { UserPayload } from '@/infra/auth/jwt.strategy';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 
 const createQuestionBodySchema = z.object({
   content: z.string(),

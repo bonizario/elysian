@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions.use-case';
 
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 import { QuestionPresenter } from '@/infra/http/presenters/question.presenter';
 
 const queryParamSchema = z.object({

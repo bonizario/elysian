@@ -44,8 +44,7 @@ describe('Get Question By Slug (E2E)', () => {
 
     const response = await request(app.getHttpServer())
       .get('/questions/question-01')
-      .set('Authorization', `Bearer ${accessToken}`)
-      .send();
+      .set('Authorization', `Bearer ${accessToken}`);
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({

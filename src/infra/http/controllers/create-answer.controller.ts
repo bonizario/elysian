@@ -11,7 +11,7 @@ import { CreateAnswerUseCase } from '@/domain/forum/application/use-cases/create
 
 import { CurrentUser } from '@/infra/auth/current-user.decorator';
 import type { UserPayload } from '@/infra/auth/jwt.strategy';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 
 const createAnswerBodySchema = z.object({
   content: z.string(),

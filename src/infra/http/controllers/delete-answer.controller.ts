@@ -1,52 +1,36 @@
 import {
   BadRequestException,
-  Body,
   Controller,
+  Delete,
   ForbiddenException,
   HttpCode,
   NotFoundException,
   Param,
-  Put,
 } from '@nestjs/common';
-import { z } from 'zod';
 
 import { NotAllowedError } from '@/core/errors/not-allowed-error';
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error';
 
-import { EditAnswerUseCase } from '@/domain/forum/application/use-cases/edit-answer.use-case';
+import { DeleteAnswerUseCase } from '@/domain/forum/application/use-cases/delete-answer.use-case';
 
 import { CurrentUser } from '@/infra/auth/current-user.decorator';
 import type { UserPayload } from '@/infra/auth/jwt.strategy';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
-
-const editAnswerBodySchema = z.object({
-  content: z.string(),
-});
-
-const bodyValidationPipe = new ZodValidationPipe(editAnswerBodySchema);
-
-type EditAnswerBody = z.infer<typeof editAnswerBodySchema>;
 
 @Controller('/answers/:id')
-export class EditAnswerController {
-  constructor(private readonly editAnswer: EditAnswerUseCase) {}
+export class DeleteAnswerController {
+  constructor(private readonly deleteAnswer: DeleteAnswerUseCase) {}
 
-  @Put()
+  @Delete()
   @HttpCode(204)
   async handle(
-    @Body(bodyValidationPipe) body: EditAnswerBody,
     @CurrentUser() user: UserPayload,
     @Param('id') answerId: string,
   ) {
-    const { content } = body;
-
     const authorId = user.sub;
 
-    const result = await this.editAnswer.execute({
+    const result = await this.deleteAnswer.execute({
       answerId,
-      attachmentsIds: [],
       authorId,
-      content,
     });
 
     if (result.isLeft()) {

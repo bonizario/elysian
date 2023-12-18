@@ -11,7 +11,7 @@ import { StudentAlreadyExistsError } from '@/domain/forum/application/use-cases/
 import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student.use-case';
 
 import { Public } from '@/infra/auth/public';
-import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
+import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 
 const registerStudentBodySchema = z.object({
   email: z.string().email(),
