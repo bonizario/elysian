@@ -5,16 +5,14 @@ import request from 'supertest';
 
 import { AppModule } from '@/infra/app.module';
 import { DatabaseModule } from '@/infra/database/database.module';
-import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
 import { AnswerFactory } from '@/test/factories/make-answer';
 import { QuestionFactory } from '@/test/factories/make-question';
 import { StudentFactory } from '@/test/factories/make-student';
 
-describe('Delete Answer (E2E)', () => {
+describe('Fetch Question Answers (E2E)', () => {
   let app: INestApplication;
   let jwt: JwtService;
-  let prisma: PrismaService;
   let answerFactory: AnswerFactory;
   let questionFactory: QuestionFactory;
   let studentFactory: StudentFactory;
@@ -27,7 +25,6 @@ describe('Delete Answer (E2E)', () => {
 
     app = moduleRef.createNestApplication();
     jwt = moduleRef.get(JwtService);
-    prisma = moduleRef.get(PrismaService);
     answerFactory = moduleRef.get(AnswerFactory);
     questionFactory = moduleRef.get(QuestionFactory);
     studentFactory = moduleRef.get(StudentFactory);
@@ -35,7 +32,7 @@ describe('Delete Answer (E2E)', () => {
     await app.init();
   });
 
-  test('[DELETE] /answers/:id', async () => {
+  test('[GET] /questions/:questionId/answers', async () => {
     const user = await studentFactory.makePrismaStudent();
 
     const accessToken = jwt.sign({ sub: user.id.toValue() });
@@ -44,25 +41,31 @@ describe('Delete Answer (E2E)', () => {
       authorId: user.id,
     });
 
-    const answer = await answerFactory.makePrismaAnswer({
-      authorId: user.id,
-      questionId: question.id,
-    });
+    await Promise.all([
+      answerFactory.makePrismaAnswer({
+        authorId: user.id,
+        questionId: question.id,
+        content: 'Answer 01',
+      }),
+      answerFactory.makePrismaAnswer({
+        authorId: user.id,
+        questionId: question.id,
+        content: 'Answer 02',
+      }),
+    ]);
 
-    const answerId = answer.id.toValue();
+    const questionId = question.id.toValue();
 
     const response = await request(app.getHttpServer())
-      .delete(`/answers/${answerId}`)
+      .get(`/questions/${questionId}/answers`)
       .set('Authorization', `Bearer ${accessToken}`);
 
-    expect(response.statusCode).toBe(204);
-
-    const answerOnDatabase = await prisma.answer.findUnique({
-      where: {
-        id: answerId,
-      },
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({
+      answers: expect.arrayContaining([
+        expect.objectContaining({ content: 'Answer 01' }),
+        expect.objectContaining({ content: 'Answer 02' }),
+      ]),
     });
-
-    expect(answerOnDatabase).toBeNull();
   });
 });

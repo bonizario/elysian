@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 import { right, type Either } from '@/core/either';
 
 import { AnswersRepository } from '@/domain/forum/application/repositories/answers.repository';
@@ -16,6 +18,7 @@ type FetchQuestionAnswersUseCaseResponse = Either<
   }
 >;
 
+@Injectable()
 export class FetchQuestionAnswersUseCase {
   constructor(private readonly answersRepository: AnswersRepository) {}
 

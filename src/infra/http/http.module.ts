@@ -7,6 +7,7 @@ import { DeleteAnswerUseCase } from '@/domain/forum/application/use-cases/delete
 import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases/delete-question.use-case';
 import { EditAnswerUseCase } from '@/domain/forum/application/use-cases/edit-answer.use-case';
 import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question.use-case';
+import { FetchQuestionAnswersUseCase } from '@/domain/forum/application/use-cases/fetch-question-answers.use-case';
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions.use-case';
 import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/get-question-by-slug.use-case';
 import { RegisterStudentUseCase } from '@/domain/forum/application/use-cases/register-student.use-case';
@@ -21,6 +22,7 @@ import { DeleteAnswerController } from './controllers/delete-answer.controller';
 import { DeleteQuestionController } from './controllers/delete-question.controller';
 import { EditAnswerController } from './controllers/edit-answer.controller';
 import { EditQuestionController } from './controllers/edit-question.controller';
+import { FetchQuestionAnswersController } from './controllers/fetch-question-answers.controller';
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller';
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller';
 import { RegisterStudentController } from './controllers/register-student.controller';
@@ -34,6 +36,7 @@ import { RegisterStudentController } from './controllers/register-student.contro
     DeleteQuestionController,
     EditAnswerController,
     EditQuestionController,
+    FetchQuestionAnswersController,
     FetchRecentQuestionsController,
     GetQuestionBySlugController,
     RegisterStudentController,
@@ -47,6 +50,7 @@ import { RegisterStudentController } from './controllers/register-student.contro
     DeleteQuestionUseCase,
     EditAnswerUseCase,
     EditQuestionUseCase,
+    FetchQuestionAnswersUseCase,
     FetchRecentQuestionsUseCase,
     GetQuestionBySlugUseCase,
     RegisterStudentUseCase,

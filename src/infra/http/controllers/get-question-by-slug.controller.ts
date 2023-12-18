@@ -14,7 +14,7 @@ import { QuestionPresenter } from '@/infra/http/presenters/question.presenter';
 
 @Controller('/questions/:slug')
 export class GetQuestionBySlugController {
-  constructor(private getQuestionBySlug: GetQuestionBySlugUseCase) {}
+  constructor(private readonly getQuestionBySlug: GetQuestionBySlugUseCase) {}
 
   @Get()
   async handle(@Param('slug') slug: string) {
