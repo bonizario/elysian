@@ -10,7 +10,7 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service';
 import { QuestionFactory } from '@/test/factories/make-question';
 import { StudentFactory } from '@/test/factories/make-student';
 
-describe('Delete question (E2E)', () => {
+describe('Delete Question (E2E)', () => {
   let app: INestApplication;
   let jwt: JwtService;
   let prisma: PrismaService;

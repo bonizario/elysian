@@ -3,11 +3,11 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { InMemoryAnswerAttachmentsRepository } from '@/test/repositories/in-memory-answer-attachments.repository';
 import { InMemoryAnswersRepository } from '@/test/repositories/in-memory-answers.repository';
 
-import { AnswerQuestionUseCase } from './answer-question.use-case';
+import { CreateAnswerUseCase } from './create-answer.use-case';
 
 let inMemoryAnswerAttachmentsRepository: InMemoryAnswerAttachmentsRepository;
 let inMemoryAnswersRepository: InMemoryAnswersRepository;
-let sut: AnswerQuestionUseCase;
+let sut: CreateAnswerUseCase;
 
 describe('Create Answer', () => {
   beforeEach(() => {
@@ -18,7 +18,7 @@ describe('Create Answer', () => {
       inMemoryAnswerAttachmentsRepository,
     );
 
-    sut = new AnswerQuestionUseCase(inMemoryAnswersRepository);
+    sut = new CreateAnswerUseCase(inMemoryAnswersRepository);
   });
 
   it('should be able to create an answer', async () => {

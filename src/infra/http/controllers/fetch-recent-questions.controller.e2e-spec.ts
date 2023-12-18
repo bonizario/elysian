@@ -9,7 +9,7 @@ import { DatabaseModule } from '@/infra/database/database.module';
 import { QuestionFactory } from '@/test/factories/make-question';
 import { StudentFactory } from '@/test/factories/make-student';
 
-describe('Fetch recent questions (E2E)', () => {
+describe('Fetch Recent Questions (E2E)', () => {
   let app: INestApplication;
   let jwt: JwtService;
   let questionFactory: QuestionFactory;

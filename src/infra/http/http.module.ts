@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student.use-case';
+import { CreateAnswerUseCase } from '@/domain/forum/application/use-cases/create-answer.use-case';
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question.use-case';
 import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases/delete-question.use-case';
 import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question.use-case';
@@ -12,6 +13,7 @@ import { CryptographyModule } from '@/infra/cryptography/cryptography.module';
 import { DatabaseModule } from '@/infra/database/database.module';
 
 import { AuthenticateController } from './controllers/authenticate.controller';
+import { CreateAnswerController } from './controllers/create-answer.controller';
 import { CreateQuestionController } from './controllers/create-question.controller';
 import { DeleteQuestionController } from './controllers/delete-question.controller';
 import { EditQuestionController } from './controllers/edit-question.controller';
@@ -22,6 +24,7 @@ import { RegisterStudentController } from './controllers/register-student.contro
 @Module({
   controllers: [
     AuthenticateController,
+    CreateAnswerController,
     CreateQuestionController,
     DeleteQuestionController,
     EditQuestionController,
@@ -32,6 +35,7 @@ import { RegisterStudentController } from './controllers/register-student.contro
   imports: [DatabaseModule, CryptographyModule],
   providers: [
     AuthenticateStudentUseCase,
+    CreateAnswerUseCase,
     CreateQuestionUseCase,
     DeleteQuestionUseCase,
     EditQuestionUseCase,
