@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common';
+
 import { left, right, type Either } from '@/core/either';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { NotAllowedError } from '@/core/errors/not-allowed-error';
@@ -10,9 +12,9 @@ import { AnswerAttachment } from '@/domain/forum/enterprise/entities/answer-atta
 import { AnswerAttachmentList } from '@/domain/forum/enterprise/entities/answer-attachment-list';
 
 type EditAnswerUseCaseRequest = {
+  answerId: string;
   attachmentsIds: string[];
   authorId: string;
-  answerId: string;
   content: string;
 };
 
@@ -23,6 +25,7 @@ type EditAnswerUseCaseResponse = Either<
   }
 >;
 
+@Injectable()
 export class EditAnswerUseCase {
   constructor(
     private readonly answerAttachmentsRepository: AnswerAttachmentsRepository,
@@ -30,9 +33,9 @@ export class EditAnswerUseCase {
   ) {}
 
   async execute({
+    answerId,
     attachmentsIds,
     authorId,
-    answerId,
     content,
   }: EditAnswerUseCaseRequest): Promise<EditAnswerUseCaseResponse> {
     const answer = await this.answersRepository.findById(answerId);

@@ -4,6 +4,7 @@ import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases
 import { CreateAnswerUseCase } from '@/domain/forum/application/use-cases/create-answer.use-case';
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question.use-case';
 import { DeleteQuestionUseCase } from '@/domain/forum/application/use-cases/delete-question.use-case';
+import { EditAnswerUseCase } from '@/domain/forum/application/use-cases/edit-answer.use-case';
 import { EditQuestionUseCase } from '@/domain/forum/application/use-cases/edit-question.use-case';
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions.use-case';
 import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/get-question-by-slug.use-case';
@@ -16,6 +17,7 @@ import { AuthenticateController } from './controllers/authenticate.controller';
 import { CreateAnswerController } from './controllers/create-answer.controller';
 import { CreateQuestionController } from './controllers/create-question.controller';
 import { DeleteQuestionController } from './controllers/delete-question.controller';
+import { EditAnswerController } from './controllers/edit-answer.controller';
 import { EditQuestionController } from './controllers/edit-question.controller';
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller';
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller';
@@ -27,6 +29,7 @@ import { RegisterStudentController } from './controllers/register-student.contro
     CreateAnswerController,
     CreateQuestionController,
     DeleteQuestionController,
+    EditAnswerController,
     EditQuestionController,
     FetchRecentQuestionsController,
     GetQuestionBySlugController,
@@ -38,6 +41,7 @@ import { RegisterStudentController } from './controllers/register-student.contro
     CreateAnswerUseCase,
     CreateQuestionUseCase,
     DeleteQuestionUseCase,
+    EditAnswerUseCase,
     EditQuestionUseCase,
     FetchRecentQuestionsUseCase,
     GetQuestionBySlugUseCase,

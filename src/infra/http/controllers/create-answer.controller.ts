@@ -13,13 +13,13 @@ import { CurrentUser } from '@/infra/auth/current-user.decorator';
 import type { UserPayload } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe';
 
-const CreateAnswerBodySchema = z.object({
+const createAnswerBodySchema = z.object({
   content: z.string(),
 });
 
-const bodyValidationPipe = new ZodValidationPipe(CreateAnswerBodySchema);
+const bodyValidationPipe = new ZodValidationPipe(createAnswerBodySchema);
 
-type CreateAnswerBody = z.infer<typeof CreateAnswerBodySchema>;
+type CreateAnswerBody = z.infer<typeof createAnswerBodySchema>;
 
 @Controller('/questions/:questionId/answers')
 export class CreateAnswerController {
