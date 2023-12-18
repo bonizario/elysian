@@ -4,6 +4,7 @@ import { hash } from 'bcryptjs';
 import request from 'supertest';
 
 import { AppModule } from '@/infra/app.module';
+import { DatabaseModule } from '@/infra/database/database.module';
 
 import { StudentFactory } from '@/test/factories/make-student';
 
@@ -13,11 +14,12 @@ describe('Authenticate (E2E)', () => {
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, DatabaseModule],
       providers: [StudentFactory],
     }).compile();
 
     app = moduleRef.createNestApplication();
+    studentFactory = moduleRef.get(StudentFactory);
 
     await app.init();
   });

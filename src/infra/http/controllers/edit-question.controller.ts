@@ -40,8 +40,8 @@ export class EditQuestionController {
 
     const result = await this.editQuestion.execute({
       attachmentsIds: [],
-      questionId,
       authorId,
+      questionId,
       content,
       title,
     });
