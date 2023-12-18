@@ -34,8 +34,8 @@ export class EditAnswerController {
   @Put()
   @HttpCode(204)
   async handle(
-    @Body(bodyValidationPipe) body: EditAnswerBody,
     @CurrentUser() user: UserPayload,
+    @Body(bodyValidationPipe) body: EditAnswerBody,
     @Param('id') answerId: string,
   ) {
     const { content } = body;

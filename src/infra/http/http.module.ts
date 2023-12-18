@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 
 import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student.use-case';
+import { ChooseQuestionBestAnswerUseCase } from '@/domain/forum/application/use-cases/choose-question-best-answer.use-case';
+import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question.use-case';
 import { CreateAnswerUseCase } from '@/domain/forum/application/use-cases/create-answer.use-case';
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question.use-case';
 import { DeleteAnswerUseCase } from '@/domain/forum/application/use-cases/delete-answer.use-case';
@@ -16,6 +18,8 @@ import { CryptographyModule } from '@/infra/cryptography/cryptography.module';
 import { DatabaseModule } from '@/infra/database/database.module';
 
 import { AuthenticateController } from './controllers/authenticate.controller';
+import { ChooseQuestionBestAnswerController } from './controllers/choose-question-best-answer.controller';
+import { CommentOnQuestionController } from './controllers/comment-on-question.controller';
 import { CreateAnswerController } from './controllers/create-answer.controller';
 import { CreateQuestionController } from './controllers/create-question.controller';
 import { DeleteAnswerController } from './controllers/delete-answer.controller';
@@ -30,6 +34,8 @@ import { RegisterStudentController } from './controllers/register-student.contro
 @Module({
   controllers: [
     AuthenticateController,
+    ChooseQuestionBestAnswerController,
+    CommentOnQuestionController,
     CreateAnswerController,
     CreateQuestionController,
     DeleteAnswerController,
@@ -44,6 +50,8 @@ import { RegisterStudentController } from './controllers/register-student.contro
   imports: [DatabaseModule, CryptographyModule],
   providers: [
     AuthenticateStudentUseCase,
+    ChooseQuestionBestAnswerUseCase,
+    CommentOnQuestionUseCase,
     CreateAnswerUseCase,
     CreateQuestionUseCase,
     DeleteAnswerUseCase,
