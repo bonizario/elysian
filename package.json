@@ -4,6 +4,7 @@
   "author": "bonizario",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "build": "nest build",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -18,7 +19,7 @@
     "test:e2e:watch": "vitest --config ./vitest.config.e2e.mts"
   },
   "dependencies": {
-    "@nestjs/common": "10.0.0",
+    "@nestjs/common": "10.3.0",
     "@nestjs/config": "3.1.1",
     "@nestjs/core": "10.0.0",
     "@nestjs/jwt": "10.2.0",
@@ -42,6 +43,7 @@
     "@swc/core": "1.3.100",
     "@types/bcryptjs": "2.4.6",
     "@types/express": "4.17.17",
+    "@types/multer": "1.4.11",
     "@types/node": "20.3.1",
     "@types/supertest": "2.0.16",
     "@typescript-eslint/eslint-plugin": "6.13.2",

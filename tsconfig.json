@@ -16,7 +16,10 @@
       "@/*": ["./src/*"],
       "@/test/*": ["./test/*"]
     },
-    "types": ["vitest/globals"],                      /* Specify type package names to be included without being referenced in a source file. */
+    "types": [                                        /* Specify type package names to be included without being referenced in a source file. */
+      "multer",
+      "vitest/globals"
+    ],
     "resolveJsonModule": true,                        /* Enable importing .json files. */
 
     /* Emit */

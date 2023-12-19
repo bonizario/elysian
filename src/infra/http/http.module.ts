@@ -40,6 +40,7 @@ import { FetchQuestionCommentsController } from './controllers/fetch-question-co
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller';
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller';
 import { RegisterStudentController } from './controllers/register-student.controller';
+import { UploadAttachmentController } from './controllers/upload-attachment.controller';
 
 @Module({
   controllers: [
@@ -61,6 +62,7 @@ import { RegisterStudentController } from './controllers/register-student.contro
     FetchRecentQuestionsController,
     GetQuestionBySlugController,
     RegisterStudentController,
+    UploadAttachmentController,
   ],
   imports: [DatabaseModule, CryptographyModule],
   providers: [

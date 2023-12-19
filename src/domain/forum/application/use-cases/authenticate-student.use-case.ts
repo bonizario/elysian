@@ -38,6 +38,7 @@ export class AuthenticateStudentUseCase {
 
     if (!student) {
       await this.hashGenerator.hash(password); //avoidance of timing attacks
+
       return left(new InvalidCredentialsError());
     }
 
