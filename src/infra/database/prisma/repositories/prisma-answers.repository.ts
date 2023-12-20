@@ -1,16 +1,20 @@
 import { Injectable } from '@nestjs/common';
 
-import { PaginationParams } from '@/core/repositories/pagination-params';
+import type { PaginationParams } from '@/core/repositories/pagination-params';
 
-import { AnswersRepository } from '@/domain/forum/application/repositories/answers.repository';
-import { Answer } from '@/domain/forum/enterprise/entities/answer';
+import { AnswerAttachmentsRepository } from '@/domain/forum/application/repositories/answer-attachments.repository';
+import type { AnswersRepository } from '@/domain/forum/application/repositories/answers.repository';
+import type { Answer } from '@/domain/forum/enterprise/entities/answer';
 
 import { PrismaAnswerMapper } from '@/infra/database/prisma/mappers/prisma-answer.mapper';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
 @Injectable()
 export class PrismaAnswersRepository implements AnswersRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly answerAttachmentsRepository: AnswerAttachmentsRepository,
+  ) {}
 
   async create(answer: Answer) {
     const data = PrismaAnswerMapper.toPrisma(answer);
@@ -18,6 +22,10 @@ export class PrismaAnswersRepository implements AnswersRepository {
     await this.prisma.answer.create({
       data,
     });
+
+    await this.answerAttachmentsRepository.createMany(
+      answer.attachments.getItems(),
+    );
   }
 
   async delete(answer: Answer) {
@@ -59,11 +67,19 @@ export class PrismaAnswersRepository implements AnswersRepository {
   async save(answer: Answer) {
     const data = PrismaAnswerMapper.toPrisma(answer);
 
-    await this.prisma.answer.update({
-      where: {
-        id: data.id,
-      },
-      data,
-    });
+    await Promise.all([
+      this.prisma.answer.update({
+        where: {
+          id: data.id,
+        },
+        data,
+      }),
+      this.answerAttachmentsRepository.createMany(
+        answer.attachments.getNewItems(),
+      ),
+      this.answerAttachmentsRepository.deleteMany(
+        answer.attachments.getRemovedItems(),
+      ),
+    ]);
   }
 }

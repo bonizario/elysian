@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
-import { PaginationParams } from '@/core/repositories/pagination-params';
+import type { PaginationParams } from '@/core/repositories/pagination-params';
 
 import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments.repository';
-import { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository';
-import { Question } from '@/domain/forum/enterprise/entities/question';
+import type { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository';
+import type { Question } from '@/domain/forum/enterprise/entities/question';
 
 import { PrismaQuestionMapper } from '@/infra/database/prisma/mappers/prisma-question.mapper';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';

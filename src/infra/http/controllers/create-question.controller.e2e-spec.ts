@@ -64,12 +64,21 @@ describe('Create Question (E2E)', () => {
 
     expect(questionOnDatabase).toBeTruthy();
 
-    const attachmentsOnDatabase = await prisma.attachment.findMany({
+    const questionAttachmentsOnDatabase = await prisma.attachment.findMany({
       where: {
         questionId: questionOnDatabase?.id,
       },
     });
 
-    expect(attachmentsOnDatabase).toHaveLength(2);
+    expect(questionAttachmentsOnDatabase).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: attachment1.id.toValue(),
+        }),
+        expect.objectContaining({
+          id: attachment2.id.toValue(),
+        }),
+      ]),
+    );
   });
 });

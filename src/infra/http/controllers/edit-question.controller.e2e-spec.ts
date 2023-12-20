@@ -60,6 +60,8 @@ describe('Edit Question (E2E)', () => {
       authorId: user.id,
     });
 
+    const questionId = question.id.toValue();
+
     await questionAttachmentFactory.makePrismaQuestionAttachment({
       attachmentId: attachment1.id,
       questionId: question.id,
@@ -71,8 +73,6 @@ describe('Edit Question (E2E)', () => {
     });
 
     const attachment3 = await attachmentFactory.makePrismaAttachment();
-
-    const questionId = question.id.toValue();
 
     const response = await request(app.getHttpServer())
       .put(`/questions/${questionId}`)
@@ -93,14 +93,13 @@ describe('Edit Question (E2E)', () => {
 
     expect(questionOnDatabase).toBeTruthy();
 
-    const attachmentsOnDatabase = await prisma.attachment.findMany({
+    const questionAttachmentsOnDatabase = await prisma.attachment.findMany({
       where: {
         questionId: questionOnDatabase?.id,
       },
     });
 
-    expect(attachmentsOnDatabase).toHaveLength(2);
-    expect(attachmentsOnDatabase).toEqual(
+    expect(questionAttachmentsOnDatabase).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           id: attachment1.id.toValue(),

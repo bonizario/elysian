@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
-import { StudentsRepository } from '@/domain/forum/application/repositories/students.repository';
-import { Student } from '@/domain/forum/enterprise/entities/student';
+import type { StudentsRepository } from '@/domain/forum/application/repositories/students.repository';
+import type { Student } from '@/domain/forum/enterprise/entities/student';
 
 import { PrismaStudentMapper } from '@/infra/database/prisma/mappers/prisma-student.mapper';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';

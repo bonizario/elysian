@@ -8,7 +8,7 @@ import type { UserPayload } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 
 const createQuestionBodySchema = z.object({
-  attachments: z.array(z.string().uuid()),
+  attachments: z.array(z.string().uuid()).default([]),
   content: z.string(),
   title: z.string(),
 });

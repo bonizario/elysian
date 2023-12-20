@@ -25,7 +25,7 @@ describe('Create Answer', () => {
     const result = await sut.execute({
       attachmentsIds: ['attachment-1', 'attachment-2'],
       questionId: 'question-1',
-      instructorId: 'instructor-1',
+      authorId: 'author-1',
       content: 'Example answer content',
     });
 
@@ -42,5 +42,27 @@ describe('Create Answer', () => {
         attachmentId: new UniqueEntityID('attachment-2'),
       }),
     ]);
+  });
+
+  it('should persist attachments when creating an answer', async () => {
+    const result = await sut.execute({
+      attachmentsIds: ['attachment-1', 'attachment-2'],
+      authorId: 'author-1',
+      questionId: 'question-1',
+      content: 'Example question content',
+    });
+
+    expect(result.isRight()).toBe(true);
+    expect(inMemoryAnswerAttachmentsRepository.items).toHaveLength(2);
+    expect(inMemoryAnswerAttachmentsRepository.items).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          attachmentId: new UniqueEntityID('attachment-1'),
+        }),
+        expect.objectContaining({
+          attachmentId: new UniqueEntityID('attachment-2'),
+        }),
+      ]),
+    );
   });
 });
