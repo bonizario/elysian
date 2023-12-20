@@ -20,6 +20,7 @@ import type { UserPayload } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 
 const editQuestionBodySchema = z.object({
+  attachments: z.array(z.string().uuid()),
   content: z.string(),
   title: z.string(),
 });
@@ -39,12 +40,12 @@ export class EditQuestionController {
     @Body(bodyValidationPipe) body: EditQuestionBody,
     @Param('id') questionId: string,
   ) {
-    const { content, title } = body;
+    const { attachments, content, title } = body;
 
     const authorId = user.sub;
 
     const result = await this.editQuestion.execute({
-      attachmentsIds: [],
+      attachmentsIds: attachments,
       authorId,
       questionId,
       content,
