@@ -9,11 +9,15 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
   public items: Question[] = [];
 
   constructor(
-    private readonly inMemoryQuestionAttachmentsRepository: QuestionAttachmentsRepository,
+    private readonly questionAttachmentsRepository: QuestionAttachmentsRepository,
   ) {}
 
   async create(question: Question) {
     this.items.push(question);
+
+    await this.questionAttachmentsRepository.createMany(
+      question.attachments.getItems(),
+    );
 
     DomainEvents.dispatchEventsForAggregate(question.id);
   }
@@ -25,7 +29,7 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
 
     this.items.splice(itemIndex, 1);
 
-    await this.inMemoryQuestionAttachmentsRepository.deleteManyByQuestionId(
+    await this.questionAttachmentsRepository.deleteManyByQuestionId(
       question.id.toValue(),
     );
   }
@@ -50,6 +54,14 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
     );
 
     this.items[itemIndex] = question;
+
+    await this.questionAttachmentsRepository.createMany(
+      question.attachments.getNewItems(),
+    );
+
+    await this.questionAttachmentsRepository.deleteMany(
+      question.attachments.getRemovedItems(),
+    );
 
     DomainEvents.dispatchEventsForAggregate(question.id);
   }

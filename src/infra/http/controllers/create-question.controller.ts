@@ -8,6 +8,7 @@ import type { UserPayload } from '@/infra/auth/jwt.strategy';
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation.pipe';
 
 const createQuestionBodySchema = z.object({
+  attachments: z.array(z.string().uuid()),
   content: z.string(),
   title: z.string(),
 });
@@ -25,12 +26,12 @@ export class CreateQuestionController {
     @CurrentUser() user: UserPayload,
     @Body(bodyValidationPipe) body: CreateQuestionBody,
   ) {
-    const { content, title } = body;
+    const { attachments, content, title } = body;
 
     const authorId = user.sub;
 
     const result = await this.createQuestion.execute({
-      attachmentsIds: [],
+      attachmentsIds: attachments,
       authorId,
       content,
       title,
