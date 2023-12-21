@@ -6,6 +6,7 @@ import type { AnswerCommentsRepository } from '@/domain/forum/application/reposi
 import type { AnswerComment } from '@/domain/forum/enterprise/entities/answer-comment';
 
 import { PrismaAnswerCommentMapper } from '@/infra/database/prisma/mappers/prisma-answer-comment.mapper';
+import { PrismaCommentWithAuthorMapper } from '@/infra/database/prisma/mappers/prisma-comment-with-author.mapper';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
 @Injectable()
@@ -13,6 +14,22 @@ export class PrismaAnswerCommentsRepository
   implements AnswerCommentsRepository
 {
   constructor(private readonly prisma: PrismaService) {}
+
+  async create(answerComment: AnswerComment) {
+    const data = PrismaAnswerCommentMapper.toPrisma(answerComment);
+
+    await this.prisma.comment.create({
+      data,
+    });
+  }
+
+  async delete(answerComment: AnswerComment) {
+    await this.prisma.comment.delete({
+      where: {
+        id: answerComment.id.toValue(),
+      },
+    });
+  }
 
   async findById(id: string) {
     const answerComment = await this.prisma.comment.findUnique({
@@ -44,19 +61,24 @@ export class PrismaAnswerCommentsRepository
     return answerComments.map(PrismaAnswerCommentMapper.toDomain);
   }
 
-  async create(answerComment: AnswerComment) {
-    const data = PrismaAnswerCommentMapper.toPrisma(answerComment);
-
-    await this.prisma.comment.create({
-      data,
-    });
-  }
-
-  async delete(answerComment: AnswerComment) {
-    await this.prisma.comment.delete({
+  async findManyByAnswerIdWithAuthor(
+    answerId: string,
+    { limit, page }: PaginationParams,
+  ) {
+    const answerComments = await this.prisma.comment.findMany({
       where: {
-        id: answerComment.id.toValue(),
+        answerId,
       },
+      include: {
+        author: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      skip: page * limit,
+      take: limit,
     });
+
+    return answerComments.map(PrismaCommentWithAuthorMapper.toDomain);
   }
 }

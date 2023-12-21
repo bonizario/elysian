@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { right, type Either } from '@/core/either';
 
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments.repository';
-import { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author';
+import type { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author';
 
 type FetchQuestionCommentsUseCaseRequest = {
   questionId: string;

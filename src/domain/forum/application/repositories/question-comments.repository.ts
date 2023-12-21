@@ -1,7 +1,7 @@
 import type { PaginationParams } from '@/core/repositories/pagination-params';
 
 import type { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment';
-import { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author';
+import type { CommentWithAuthor } from '@/domain/forum/enterprise/entities/value-objects/comment-with-author';
 
 export abstract class QuestionCommentsRepository {
   abstract create(questionComment: QuestionComment): Promise<void>;
