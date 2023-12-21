@@ -3,16 +3,21 @@ import { NotAllowedError } from '@/core/errors/not-allowed-error';
 
 import { makeQuestionComment } from '@/test/factories/make-question-comment';
 import { InMemoryQuestionCommentsRepository } from '@/test/repositories/in-memory-question-comments.repository';
+import { InMemoryStudentsRepository } from '@/test/repositories/in-memory-students.repository';
 
 import { DeleteQuestionCommentUseCase } from './delete-question-comment.use-case';
 
 let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository;
+let inMemoryStudentsRepository: InMemoryStudentsRepository;
 let sut: DeleteQuestionCommentUseCase;
 
 describe('Delete Question Comment', () => {
   beforeEach(() => {
-    inMemoryQuestionCommentsRepository =
-      new InMemoryQuestionCommentsRepository();
+    inMemoryStudentsRepository = new InMemoryStudentsRepository();
+
+    inMemoryQuestionCommentsRepository = new InMemoryQuestionCommentsRepository(
+      inMemoryStudentsRepository,
+    );
 
     sut = new DeleteQuestionCommentUseCase(inMemoryQuestionCommentsRepository);
   });

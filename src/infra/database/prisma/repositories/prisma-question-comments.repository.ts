@@ -5,6 +5,7 @@ import type { PaginationParams } from '@/core/repositories/pagination-params';
 import type { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments.repository';
 import type { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment';
 
+import { PrismaCommentWithAuthorMapper } from '@/infra/database/prisma/mappers/prisma-comment-with-author.mapper';
 import { PrismaQuestionCommentMapper } from '@/infra/database/prisma/mappers/prisma-question-comment.mapper';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
@@ -13,6 +14,22 @@ export class PrismaQuestionCommentsRepository
   implements QuestionCommentsRepository
 {
   constructor(private readonly prisma: PrismaService) {}
+
+  async create(questionComment: QuestionComment) {
+    const data = PrismaQuestionCommentMapper.toPrisma(questionComment);
+
+    await this.prisma.comment.create({
+      data,
+    });
+  }
+
+  async delete(questionComment: QuestionComment) {
+    await this.prisma.comment.delete({
+      where: {
+        id: questionComment.id.toValue(),
+      },
+    });
+  }
 
   async findById(id: string) {
     const questionComment = await this.prisma.comment.findUnique({
@@ -44,19 +61,24 @@ export class PrismaQuestionCommentsRepository
     return questionComments.map(PrismaQuestionCommentMapper.toDomain);
   }
 
-  async create(questionComment: QuestionComment) {
-    const data = PrismaQuestionCommentMapper.toPrisma(questionComment);
-
-    await this.prisma.comment.create({
-      data,
-    });
-  }
-
-  async delete(questionComment: QuestionComment) {
-    await this.prisma.comment.delete({
+  async findManyByQuestionIdWithAuthor(
+    questionId: string,
+    { limit, page }: PaginationParams,
+  ) {
+    const questionComments = await this.prisma.comment.findMany({
       where: {
-        id: questionComment.id.toValue(),
+        questionId,
       },
+      include: {
+        author: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      skip: page * limit,
+      take: limit,
     });
+
+    return questionComments.map(PrismaCommentWithAuthorMapper.toDomain);
   }
 }

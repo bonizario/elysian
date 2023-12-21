@@ -13,8 +13,8 @@ export class InMemoryAnswerCommentsRepository
   }
 
   async delete(answerComment: AnswerComment) {
-    const itemIndex = this.items.findIndex(
-      (item) => item.id.toValue() === answerComment.id.toValue(),
+    const itemIndex = this.items.findIndex((item) =>
+      item.id.equals(answerComment.id),
     );
 
     this.items.splice(itemIndex, 1);

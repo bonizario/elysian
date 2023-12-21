@@ -34,7 +34,7 @@ describe('Delete Answer', () => {
 
     await inMemoryAnswersRepository.create(answer);
 
-    inMemoryAnswerAttachmentsRepository.items.push(
+    await inMemoryAnswerAttachmentsRepository.createMany([
       makeAnswerAttachment({
         answerId: answer.id,
         attachmentId: new UniqueEntityID('attachment-1'),
@@ -43,7 +43,7 @@ describe('Delete Answer', () => {
         answerId: answer.id,
         attachmentId: new UniqueEntityID('attachment-2'),
       }),
-    );
+    ]);
 
     const result = await sut.execute({
       authorId: answer.authorId.toValue(),

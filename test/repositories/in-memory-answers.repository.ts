@@ -23,9 +23,7 @@ export class InMemoryAnswersRepository implements AnswersRepository {
   }
 
   async delete(answer: Answer) {
-    const itemIndex = this.items.findIndex(
-      (item) => item.id.toValue() === answer.id.toValue(),
-    );
+    const itemIndex = this.items.findIndex((item) => item.id.equals(answer.id));
 
     this.items.splice(itemIndex, 1);
 

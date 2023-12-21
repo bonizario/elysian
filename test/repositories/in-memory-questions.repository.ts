@@ -23,8 +23,8 @@ export class InMemoryQuestionsRepository implements QuestionsRepository {
   }
 
   async delete(question: Question) {
-    const itemIndex = this.items.findIndex(
-      (item) => item.id.toValue() === question.id.toValue(),
+    const itemIndex = this.items.findIndex((item) =>
+      item.id.equals(question.id),
     );
 
     this.items.splice(itemIndex, 1);

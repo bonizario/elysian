@@ -37,7 +37,7 @@ describe('Edit Answer', () => {
 
     await inMemoryAnswersRepository.create(answer);
 
-    inMemoryAnswerAttachmentsRepository.items.push(
+    await inMemoryAnswerAttachmentsRepository.createMany([
       makeAnswerAttachment({
         answerId: answer.id,
         attachmentId: new UniqueEntityID('attachment-1'),
@@ -46,7 +46,7 @@ describe('Edit Answer', () => {
         answerId: answer.id,
         attachmentId: new UniqueEntityID('attachment-2'),
       }),
-    );
+    ]);
 
     const result = await sut.execute({
       attachmentsIds: ['attachment-1', 'attachment-3'],
@@ -104,7 +104,7 @@ describe('Edit Answer', () => {
 
     await inMemoryAnswersRepository.create(answer);
 
-    inMemoryAnswerAttachmentsRepository.items.push(
+    await inMemoryAnswerAttachmentsRepository.createMany([
       makeAnswerAttachment({
         answerId: answer.id,
         attachmentId: new UniqueEntityID('attachment-1'),
@@ -113,7 +113,7 @@ describe('Edit Answer', () => {
         answerId: answer.id,
         attachmentId: new UniqueEntityID('attachment-2'),
       }),
-    );
+    ]);
 
     const result = await sut.execute({
       answerId: answer.id.toValue(),
