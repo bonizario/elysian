@@ -17,17 +17,17 @@ enum UserRole {
 model User {
   id String @id @default(uuid()) @db.Uuid
 
-  email    String   @unique
-  name     String
-  password String
-  role     UserRole @default(STUDENT)
-
+  email     String    @unique
+  name      String
+  password  String
+  role      UserRole  @default(STUDENT)
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
-  answers   Answer[]
-  comments  Comment[]
-  questions Question[]
+  answers       Answer[]
+  comments      Comment[]
+  questions     Question[]
+  notifications Notification[]
 
   @@map("users")
 }
@@ -38,10 +38,9 @@ model Question {
   authorId     String  @map("author_id") @db.Uuid
   bestAnswerId String? @unique @map("best_answer_id") @db.Uuid
 
-  content String
-  slug    String @unique
-  title   String
-
+  content   String
+  slug      String    @unique
+  title     String
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
@@ -61,8 +60,7 @@ model Answer {
   authorId   String @map("author_id") @db.Uuid
   questionId String @map("question_id") @db.Uuid
 
-  content String
-
+  content   String
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
@@ -83,8 +81,7 @@ model Comment {
   authorId   String  @map("author_id") @db.Uuid
   questionId String? @map("question_id") @db.Uuid
 
-  content String
-
+  content   String
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
@@ -108,4 +105,19 @@ model Attachment {
   question Question? @relation(fields: [questionId], references: [id])
 
   @@map("attachments")
+}
+
+model Notification {
+  id String @id @default(uuid()) @db.Uuid
+
+  recipientId String @map("recipient_id") @db.Uuid
+
+  content   String
+  title     String
+  createdAt DateTime  @default(now()) @map("created_at")
+  readAt    DateTime? @map("read_at")
+
+  recipient User @relation(fields: [recipientId], references: [id])
+
+  @@map("notifications")
 }

@@ -40,6 +40,14 @@ export class PrismaAnswerAttachmentsRepository
     });
   }
 
+  async deleteManyByAnswerId(answerId: string) {
+    await this.prisma.attachment.deleteMany({
+      where: {
+        answerId,
+      },
+    });
+  }
+
   async findManyByAnswerId(answerId: string) {
     const answerAttachments = await this.prisma.attachment.findMany({
       where: {
@@ -48,13 +56,5 @@ export class PrismaAnswerAttachmentsRepository
     });
 
     return answerAttachments.map(PrismaAnswerAttachmentMapper.toDomain);
-  }
-
-  async deleteManyByAnswerId(answerId: string) {
-    await this.prisma.attachment.deleteMany({
-      where: {
-        answerId,
-      },
-    });
   }
 }

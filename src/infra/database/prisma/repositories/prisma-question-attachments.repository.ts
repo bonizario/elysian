@@ -40,6 +40,14 @@ export class PrismaQuestionAttachmentsRepository
     });
   }
 
+  async deleteManyByQuestionId(questionId: string) {
+    await this.prisma.attachment.deleteMany({
+      where: {
+        questionId,
+      },
+    });
+  }
+
   async findManyByQuestionId(questionId: string) {
     const questionAttachments = await this.prisma.attachment.findMany({
       where: {
@@ -48,13 +56,5 @@ export class PrismaQuestionAttachmentsRepository
     });
 
     return questionAttachments.map(PrismaQuestionAttachmentMapper.toDomain);
-  }
-
-  async deleteManyByQuestionId(questionId: string) {
-    await this.prisma.attachment.deleteMany({
-      where: {
-        questionId,
-      },
-    });
   }
 }

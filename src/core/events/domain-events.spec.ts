@@ -6,9 +6,9 @@ import type { DomainEvent } from '@/core/events/domain-event';
 import { DomainEvents } from '@/core/events/domain-events';
 
 class CustomAggregateCreated implements DomainEvent {
-  private aggregate: CustomAggregate;
+  readonly aggregate: CustomAggregate;
 
-  public occurredAt: Date;
+  readonly occurredAt: Date;
 
   constructor(aggregate: CustomAggregate) {
     this.aggregate = aggregate;

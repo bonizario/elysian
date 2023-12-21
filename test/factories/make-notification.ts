@@ -3,9 +3,9 @@ import { faker } from '@faker-js/faker';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
 import {
-  Notification,
-  type NotificationProps,
-} from '@/domain/notifications/enterprise/entities/notification';
+    Notification,
+    type NotificationProps,
+} from '@/domain/notification/enterprise/entities/notification';
 
 export function makeNotification(
   override?: Partial<NotificationProps>,
