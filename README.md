@@ -71,6 +71,7 @@ JWT_PUBLIC_KEY=
 │   │   │   ├── application
 │   │   │   │   ├── cryptography
 │   │   │   │   ├── repositories
+│   │   │   │   ├── storage
 │   │   │   │   └── use-cases
 │   │   │   │       └── errors
 │   │   │   └── enterprise
@@ -86,16 +87,22 @@ JWT_PUBLIC_KEY=
 │   │           └── entities
 │   └── infra
 │       ├── auth
+│       ├── cryptography
 │       ├── database
 │       │   └── prisma
 │       │       ├── mappers
 │       │       └── repositories
-│       └── http
-│           ├── controllers
-│           ├── pipes
-│           └── presenters
+│       ├── env
+│       ├── http
+│       │   ├── controllers
+│       │   ├── pipes
+│       │   └── presenters
+│       └── storage
 └── test
+    ├── cryptography
+    ├── e2e
     ├── factories
     ├── repositories
+    ├── storage
     └── utils
 ```

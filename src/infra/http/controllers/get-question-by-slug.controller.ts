@@ -10,7 +10,7 @@ import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error';
 
 import { GetQuestionBySlugUseCase } from '@/domain/forum/application/use-cases/get-question-by-slug.use-case';
 
-import { QuestionPresenter } from '@/infra/http/presenters/question.presenter';
+import { QuestionDetailsPresenter } from '@/infra/http/presenters/question-details.presenter';
 
 @Controller('/questions/:slug')
 export class GetQuestionBySlugController {
@@ -33,7 +33,7 @@ export class GetQuestionBySlugController {
       }
     }
 
-    const question = QuestionPresenter.toHTTP(result.value.question);
+    const question = QuestionDetailsPresenter.toHTTP(result.value.question);
 
     return {
       question,

@@ -6,6 +6,7 @@ import { QuestionAttachmentsRepository } from '@/domain/forum/application/reposi
 import type { QuestionsRepository } from '@/domain/forum/application/repositories/questions.repository';
 import type { Question } from '@/domain/forum/enterprise/entities/question';
 
+import { PrismaQuestionDetailsMapper } from '@/infra/database/prisma/mappers/prisma-question-details.mapper';
 import { PrismaQuestionMapper } from '@/infra/database/prisma/mappers/prisma-question.mapper';
 import { PrismaService } from '@/infra/database/prisma/prisma.service';
 
@@ -54,6 +55,20 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     });
 
     return question ? PrismaQuestionMapper.toDomain(question) : null;
+  }
+
+  async findDetailsBySlug(slug: string) {
+    const question = await this.prisma.question.findUnique({
+      where: {
+        slug,
+      },
+      include: {
+        attachments: true,
+        author: true,
+      },
+    });
+
+    return question ? PrismaQuestionDetailsMapper.toDomain(question) : null;
   }
 
   async findManyRecent({ limit, page }: PaginationParams) {

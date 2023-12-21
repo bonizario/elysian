@@ -3,22 +3,32 @@ import { NotAllowedError } from '@/core/errors/not-allowed-error';
 
 import { makeQuestion } from '@/test/factories/make-question';
 import { makeQuestionAttachment } from '@/test/factories/make-question-attachment';
+import { InMemoryAttachmentsRepository } from '@/test/repositories/in-memory-attachments.repository';
 import { InMemoryQuestionAttachmentsRepository } from '@/test/repositories/in-memory-question-attachments.repository';
 import { InMemoryQuestionsRepository } from '@/test/repositories/in-memory-questions.repository';
+import { InMemoryStudentsRepository } from '@/test/repositories/in-memory-students.repository';
 
 import { DeleteQuestionUseCase } from './delete-question.use-case';
 
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository;
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository;
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
+let inMemoryStudentsRepository: InMemoryStudentsRepository;
 let sut: DeleteQuestionUseCase;
 
 describe('Delete Question', () => {
   beforeEach(() => {
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository();
+
     inMemoryQuestionAttachmentsRepository =
       new InMemoryQuestionAttachmentsRepository();
 
+    inMemoryStudentsRepository = new InMemoryStudentsRepository();
+
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
+      inMemoryAttachmentsRepository,
       inMemoryQuestionAttachmentsRepository,
+      inMemoryStudentsRepository,
     );
 
     sut = new DeleteQuestionUseCase(inMemoryQuestionsRepository);
