@@ -58,8 +58,7 @@ describe('On Question Best Answer Chosen (E2E)', () => {
 
     await request(app.getHttpServer())
       .patch(`/answers/${answerId}/choose-as-best`)
-      .set('Authorization', `Bearer ${accessToken}`)
-      .send();
+      .set('Authorization', `Bearer ${accessToken}`);
 
     await waitFor(async () => {
       const notificationOnDatabase = await prisma.notification.findFirst({
@@ -68,7 +67,7 @@ describe('On Question Best Answer Chosen (E2E)', () => {
         },
       });
 
-      expect(notificationOnDatabase).not.toBeNull();
+      expect(notificationOnDatabase).toBeTruthy();
     });
   });
 });

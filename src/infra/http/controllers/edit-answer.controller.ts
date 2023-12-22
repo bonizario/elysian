@@ -2,7 +2,6 @@ import {
   BadRequestException,
   Body,
   Controller,
-  ForbiddenException,
   HttpCode,
   NotFoundException,
   Param,
@@ -55,7 +54,6 @@ export class EditAnswerController {
 
       switch (error.constructor) {
         case NotAllowedError:
-          throw new ForbiddenException(error.message);
         case ResourceNotFoundError:
           throw new NotFoundException(error.message);
         default:

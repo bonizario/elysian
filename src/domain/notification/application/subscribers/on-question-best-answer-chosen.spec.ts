@@ -3,9 +3,9 @@ import type { MockInstance } from 'vitest';
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 
 import {
-    SendNotificationUseCase,
-    type SendNotificationUseCaseRequest,
-    type SendNotificationUseCaseResponse,
+  SendNotificationUseCase,
+  type SendNotificationUseCaseRequest,
+  type SendNotificationUseCaseResponse,
 } from '@/domain/notification/application/use-cases/send-notification.use-case';
 
 import { makeAnswer } from '@/test/factories/make-answer';

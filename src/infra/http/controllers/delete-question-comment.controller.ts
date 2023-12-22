@@ -2,7 +2,6 @@ import {
   BadRequestException,
   Controller,
   Delete,
-  ForbiddenException,
   HttpCode,
   NotFoundException,
   Param,
@@ -40,7 +39,6 @@ export class DeleteQuestionCommentController {
 
       switch (error.constructor) {
         case NotAllowedError:
-          throw new ForbiddenException(error.message);
         case ResourceNotFoundError:
           throw new NotFoundException(error.message);
         default:
