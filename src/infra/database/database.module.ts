@@ -10,6 +10,8 @@ import { QuestionsRepository } from '@/domain/forum/application/repositories/que
 import { StudentsRepository } from '@/domain/forum/application/repositories/students.repository';
 import { NotificationsRepository } from '@/domain/notification/application/repositories/notifications.repository';
 
+import { CacheModule } from '@/infra/cache/cache.module';
+
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaAnswerAttachmentsRepository } from './prisma/repositories/prisma-answer-attachments.repository';
 import { PrismaAnswerCommentsRepository } from './prisma/repositories/prisma-answer-comments.repository';
@@ -34,6 +36,7 @@ import { PrismaStudentsRepository } from './prisma/repositories/prisma-students.
     QuestionsRepository,
     StudentsRepository,
   ],
+  imports: [CacheModule],
   providers: [
     PrismaService,
     {

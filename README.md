@@ -78,7 +78,7 @@ JWT_PUBLIC_KEY=
 │   │   │       ├── entities
 │   │   │       │   └── value-objects
 │   │   │       └── events
-│   │   └── notifications
+│   │   └── notification
 │   │       ├── application
 │   │       │   ├── repositories
 │   │       │   ├── subscribers
@@ -87,12 +87,15 @@ JWT_PUBLIC_KEY=
 │   │           └── entities
 │   └── infra
 │       ├── auth
+│       ├── cache
+│       │   └── redis
 │       ├── cryptography
 │       ├── database
 │       │   └── prisma
 │       │       ├── mappers
 │       │       └── repositories
 │       ├── env
+│       ├── events
 │       ├── http
 │       │   ├── controllers
 │       │   ├── pipes
