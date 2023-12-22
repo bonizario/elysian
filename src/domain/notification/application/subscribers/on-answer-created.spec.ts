@@ -4,7 +4,7 @@ import {
   SendNotificationUseCase,
   type SendNotificationUseCaseRequest,
   type SendNotificationUseCaseResponse,
-} from '@/domain/notification/application/use-cases/send-notification';
+} from '@/domain/notification/application/use-cases/send-notification.use-case';
 
 import { makeAnswer } from '@/test/factories/make-answer';
 import { makeQuestion } from '@/test/factories/make-question';

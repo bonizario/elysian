@@ -11,6 +11,8 @@ export class DomainEvents {
 
   private static markedAggregates: AggregateRoot<unknown>[] = [];
 
+  static shouldRun = true;
+
   static clearHandlers() {
     this.handlersMap = {};
   }
@@ -51,6 +53,10 @@ export class DomainEvents {
   }
 
   private static dispatch(event: DomainEvent) {
+    if (!this.shouldRun) {
+      return;
+    }
+
     const eventClassName = event.constructor.name;
 
     const isEventRegistered = eventClassName in this.handlersMap;

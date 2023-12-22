@@ -4,6 +4,8 @@ import { randomUUID } from 'node:crypto';
 import { PrismaClient } from '@prisma/client';
 import { config } from 'dotenv';
 
+import { DomainEvents } from '@/core/events/domain-events';
+
 // NestJS currently does not support overriding environment variables with ConfigModule from @nestjs/config
 config({ path: '.env', override: true });
 config({ path: '.env.test', override: true });
@@ -28,6 +30,8 @@ beforeAll(async () => {
   const databaseURL = generateUniqueDatabaseURL(schemaId);
 
   process.env.DATABASE_URL = databaseURL;
+
+  DomainEvents.shouldRun = false;
 
   execSync('pnpm prisma migrate deploy');
 });
