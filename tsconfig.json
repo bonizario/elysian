@@ -37,8 +37,10 @@
     "strict": true,                                   /* Enable all strict type-checking options. */
     "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
     "strictNullChecks": true,                         /* When type checking, take into account 'null' and 'undefined'. */
-    "noImplicitOverride": true,                       /* Ensure overriding members in derived classes are marked with an override modifier. */
     "strictBindCallApply": true,                      /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */
+    "noUnusedLocals": true,                           /* Enable error reporting when local variables aren't read. */
+    "noUnusedParameters": true,                       /* Raise an error when a function parameter isn't read. */
+    "noImplicitOverride": true,                       /* Ensure overriding members in derived classes are marked with an override modifier. */
 
     /* Completeness */
     "skipLibCheck": true,                             /* Skip type checking all .d.ts files. */

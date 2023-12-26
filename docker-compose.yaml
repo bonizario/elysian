@@ -10,7 +10,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: nest-clean
-      PGDATA: /data/postgres
   cache:
     container_name: nest-clean-cache
     image: redis

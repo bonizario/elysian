@@ -1,14 +1,52 @@
-## JSON Web Token (JWT)
+# Elysian
 
-JSON Web Token (JWT) is a compact and self-contained method for securely transmitting information between parties as a JSON object.
+This application is the backend of a forum-like platform that allows users to share knowledge and ideas seamlessly.
 
-This information can be verified and trusted because it is digitally signed (via one of the many cryptography algorithms available). The main difference between these algorithms is the type of key they use:
+It results from an in-depth study and implementation of SOLID principles, Clean Architecture, Domain-Driven Design (DDD), and Test-Driven Development (TDD).
 
-- Symmetric algorithms (HMAC) use a **secret key** for signing and verifying tokens. The key must be kept secure and shared between parties that need to verify the token.
+## 🛠️ Technologies
 
-- Asymmetric algorithms (RSA, ECDSA, EdDSA) use a **private key** for signing tokens and a corresponding **public key** for verifying them. The private key must be kept secure within the main service, while the public key can be freely distributed to any other party that needs to verify tokens but should not be able to generate them.
+- 💻 Language and Framework
+    - TypeScript
+    - NestJS
+- 🔒 Authentication
+    - JSON Web Token (RS256 Algorithm)
+- ☁️ Storage
+    - Cloudflare R2 (AWS S3 API)
+- 💾 Databases
+    - Postgres
+    - Redis (Cache)
+- 🐳 Containerization
+    - Docker
+- ✅ Testing
+    - Vitest
+    - SuperTest (E2E Tests)
+    - Faker.js
+- 🧹 Linting
+    - ESLint
+    - Prettier
 
-### Setup environment variables
+## 📦 Installation
+
+Node.js (v20.10.0) is required to install dependencies and run the project.
+
+```sh
+git clone git@github.com:bonizario/elysian.git && cd elysian
+```
+
+Install the `pnpm` package manager.
+
+```sh
+npm install -g pnpm
+```
+
+Install the project dependencies.
+
+```sh
+pnpm install
+```
+
+## 🔒 Environment variables
 
 You can generate a private and public key pair using the `openssl` command in Linux/macOS:
 
@@ -51,12 +89,27 @@ JWT_PRIVATE_KEY=
 JWT_PUBLIC_KEY=
 ```
 
-## Clean Architecture and Domain-Driven Design
+## 💡 Key Concepts
 
-### Folder structure
+### What is JSON Web Token (JWT)?
+
+JSON Web Token (JWT) is a compact and self-contained method for securely transmitting information between parties as a JSON object.
+
+This information can be verified and trusted because it is digitally signed (via one of the many cryptography algorithms available). The main difference between these algorithms is the type of key they use:
+
+- Symmetric algorithms (HMAC) use a **secret key** for signing and verifying tokens. The key must be kept secure and shared between parties that need to verify the token.
+
+- Asymmetric algorithms (RSA, ECDSA, EdDSA) use a **private key** for signing tokens and a corresponding **public key** for verifying them. The private key must be kept secure within the main service, while the public key can be freely distributed to any other party that needs to verify tokens but should not be able to generate them.
+
+### Clean Architecture and Domain-Driven Design
+
+#### Folder structure
+
+```sh
+tree -d -I 'node_modules|dist|build' --sort name -A -C
+```
 
 ```
-.
 ├── prisma
 │   └── migrations
 ├── src
